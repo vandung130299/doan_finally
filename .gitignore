@@ -1,0 +1,9 @@
+.metadata
+
+Phone_BE/.settings/
+Phone_BE/.classpath
+Phone_BE/.project
+Phone_BE/target
+
+Phone_FE_Admin/node_modules/
+Phone_FE_Client/node_modules/

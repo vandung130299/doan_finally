@@ -1,0 +1,235 @@
+ [class*=icon-cps-] {
+     display: inline-block;
+     vertical-align: middle;
+     background-image: url('../image/icons_menubar-11.svg');
+     background-size: 1000px;
+     background-repeat: no-repeat;
+ }
+
+ .icon-cps-menu {
+     width: 26px;
+     height: 30px;
+     background-size: 500px;
+     background-position: -233.5px -261px;
+ }
+
+ .icon-cps-max {
+     width: 167px;
+     height: 30px;
+     background-size: 450px;
+     background-position: -54px -65.5px
+ }
+
+ .icon-cps-phone {
+     width: 28px;
+     height: 28px;
+     background-size: 500px;
+     background-position: -140px -262px;
+ }
+
+ .icon-cps-local {
+     width: 28px;
+     height: 28px;
+     background-size: 500px;
+     background-position: -93px -262px;
+ }
+
+ .icon-cps-market {
+     width: 28px;
+     height: 28px;
+     background-size: 470px;
+     background-position: -174.5px -245.5px;
+ }
+
+ .icon-cps-3, .icon-cps-fa-mobile, .icon-cps-smart-phone {
+     background-position: 5px -182px
+ }
+
+ .icon-cps-4, .icon-cps-table {
+     background-size: 280px!important;
+     background-position: -47px -168px
+ }
+
+ .icon-cps-30, .icon-cps-accessories {
+     background-size: 350px!important;
+     background-position: -192px -214px
+ }
+
+ .icon-cps-610, .icon-cps-smart-watch {
+     background-position: -107px -182px
+ }
+
+ .icon-cps-220, .icon-cps-sound {
+     background-position: -80px -182px
+ }
+
+ .icon-cps-380, .icon-cps-laptop {
+     background-size: 280px!important;
+     background-position: -21px -168px
+ }
+
+ .icon-cps-803, .icon-cps-845 {
+     background-position: -135px -182px
+ }
+
+ .icon-cps-123, .icon-cps-sim {
+     background-position: -247px -182px
+ }
+
+ .icon-cps-29, .icon-cps-secondhand {
+     background-size: 280px!important;
+     background-position: -204px -167px
+ }
+
+ .icon-cps-586, .icon-cps-installment {
+     background-position: -63px -84px
+ }
+
+ .icon-cps-408, .icon-cps-service {
+     width: 20px;
+     height: 18px;
+     background-position: -316px -217px
+ }
+
+ .icon-cps-tech {
+     background-size: 280px!important;
+     background-position: -256px -168px
+ }
+
+ .icon-cps-endow {
+     width: 20px;
+     height: 20px;
+     background-position: -350px -259px
+ }
+
+ .icon-cps-promotion {
+     background-position: -23px -210px
+ }
+
+ .icon-cps-485, .icon-cps-smarthome {
+     width: 18px;
+     height: 18px;
+     background-position: -340px -217px
+ }
+
+ .icon-cps-tcdm {
+     background-position: -192px -182px
+ }
+
+ .icon-cps-485, .icon-cps-smarthome {
+     width: 18px;
+     height: 18px;
+     background-position: -340px -217px
+ }
+
+ .icon-cps-visa {
+     width: 50px;
+     height: 30px;
+     background-size: 400px;
+     background-position: 1px -145px
+ }
+
+ .icon-cps-mastercard {
+     width: 50px;
+     height: 30px;
+     background-size: 400px;
+     background-position: -48.8px -145px
+ }
+
+ .icon-cps-atm {
+     width: 50px;
+     height: 30px;
+     background-size: 400px;
+     background-position: -98.5px -145px
+ }
+
+ .icon-cps-alepay {
+     width: 50px;
+     height: 30px;
+     background-size: 420px;
+     background-position: -157px -152px
+ }
+
+ .icon-cps-zalopay {
+     width: 50px;
+     height: 30px;
+     background-size: 420px;
+     background-position: -210px -153px
+ }
+
+ .icon-cps-vnpay {
+     width: 50px;
+     height: 30px;
+     background-size: 320px;
+     background-position: -203px -113px
+ }
+
+ .icon-cps-momo {
+     width: 50px;
+     height: 30px;
+     background-size: 300px;
+     background-position: -236px -106px
+ }
+
+ .icon-cps-mpos {
+     width: 50px;
+     height: 30px;
+     background-size: 380px;
+     background-position: 2px -161px
+ }
+
+ .icon-cps-tb {
+     width: 80px;
+     height: 38px;
+     background-position: -6px -398px;
+     background-size: 500px
+ }
+
+ .icon-cps-percent {
+     width: 39px;
+     height: 35px;
+     background-size: 900px;
+     background-position: -594px -255px;
+ }
+
+ .icon-cps-sale {
+     width: 40px;
+     height: 50px;
+     background-size: 480px;
+     background-position: -248px -122px
+ }
+
+ .icon-cps-dtv {
+    width: 160px;
+    height: 50px;
+    background-size: 480px;
+    background-position: -248px -1px;
+}
+
+ [class*=icon-brand-] {
+     width: 100%;
+     max-width: 120px;
+     height: 30px;
+     display: inline-block;
+     vertical-align: middle;
+     background-image: url('../image/full_brand-10.webp');
+     background-size: 350px;
+     background-repeat: no-repeat;
+ }
+
+ .icon-brand-apple {
+     width: 100px;
+     background-position: -242px -131px;
+ }
+
+
+ @media (max-width:739px) {
+     .hide-on-mobile {
+         display: none;
+     }
+     .icon-brand-apple {
+         width: 66px;
+         background-position: -158px -82px;
+         background-size: 230px;
+     }
+ }

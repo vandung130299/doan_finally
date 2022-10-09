@@ -1,0 +1,279 @@
+.flash-sale {
+    margin-top: 15px;
+}
+
+.flash-sale__wrap {
+    background-color: rgb(245, 242, 241);
+    /* box-shadow: 1px 1px 6px 0 rgb(0 0 0 / 9%); */
+}
+
+.flash-sale__title {
+    /* color: red; */
+    padding: 10px;
+}
+
+.flash-sale__title .title__left strong {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #ef3f23;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    text-align: center
+}
+
+.flash-sale__title .title__left strong img {
+    height: 27px;
+    margin: 0 4px;
+}
+
+.flash-sale__title .title__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.flash-sale__title .title__right ul.time {
+    margin-left: 6px;
+    display: flex;
+    color: #333;
+}
+
+.flash-sale__title .title__right ul.time li {
+    color: #f8f8f8;
+    padding: 0px 6px;
+    margin: 0 4px;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.flash-sale__title .title__right ul.time li.secon {
+    margin-right: 0px;
+}
+
+.flash-sale .flash-sale__content {}
+
+.flash-sale__content .carousel-main {
+    /* height: 340px; */
+    background-color: #fff;
+    box-shadow: 1px 1px 6px 0 rgb(0 0 0 / 9%);
+    overflow: hidden;
+
+}
+
+.flash-sale__content .carousel-cell {
+    width:20%;
+    background-color: #fff;
+}
+
+.flash-sale__content .product__box {
+    color: unset;
+    display: block;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flash-sale__content .product__box:hover {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 2px;
+    left: 0;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);
+    background-color: #fff;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+
+.flash-sale__content .product__box:hover .product__image img{
+    background-color: #fff;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    transform: scale(1.1);
+}
+
+.flash-sale__content .product__box .product__image {
+    height: 180px;
+    width: 100%;
+    position: relative;
+    margin: 15px auto;
+}
+
+.product__box .product__image img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: 0px auto;
+}
+
+.product__box .product__image .product__image-percent {
+    position: absolute;
+    top: -25px;
+    overflow: hidden;
+}
+
+.product__box .product__image .product__image-percent i {
+    display: flex;
+    color: #f8f8f8;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 700;
+    padding-bottom: 4px;
+}
+
+.product__box .product__image .product__image-sale {
+    position: absolute;
+    bottom: -6px;
+    overflow: hidden;
+}
+
+.product__box .product__image .product__image-sale i {
+    display: flex;
+    color: #f8f8f8;
+    align-items: center;
+}
+
+.product__box .product__image .product__image-sale i:after {
+    content: "HOT SALE";
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 0;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-style: italic;
+    color: #fff;
+    text-align: center;
+}
+
+.flash-sale__content .product__box .product__info {}
+
+.product__box .product__info .product__info-name {
+    margin-bottom: 10px;
+}
+
+.product__box .product__info .product__info-name h3 {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4em;
+    color: #222;
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.product__box .product__info .product__info-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.product__box .product__info .product__info-price .special-price {
+    margin-right: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #d70018;
+}
+
+.product__box .product__info .product__info-price .old-price {
+    font-size: 12px;
+    color: #716b6b;
+    text-decoration: line-through;
+}
+
+.product__box .product__info .product__info-rating {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.product__box .product__info .product__info-rating .rating_text {
+    margin-left: 10px;
+}
+
+.product__box .product__info .product__info-rating i.fa-star.checked {
+    color: orange;
+}
+
+@media (max-width:739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+    .flash-sale__content .carousel-cell {
+        width:calc(100%/3);
+        background-color: #fff;
+    }
+    .flash-sale__title .title__left strong {
+        font-size: 16px;
+    }
+    
+    .flash-sale__title .title__left strong img {
+        height: 20px;
+        margin: 0 0px;
+    }
+    .flash-sale__title .title__right {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .flash-sale__title .title__right ul.time {
+        margin-left: 6px;
+        display: flex;
+        color: #333;
+    }
+    .flash-sale__title .title__right ul.time li {
+        color: #333333;
+        padding: 0px ;
+        margin: 0 ;
+        background-color: unset;
+        border-radius: 0px;
+    }
+    .flash-sale__content .product__box {
+        padding: 10px 5px 5px 5px;
+    }
+
+    .flash-sale__content .product__box .product__image {
+        height: 84px;
+        width: 100%;
+        position: relative;
+        margin: 15px auto;
+    }
+    .product__box .product__info .product__info-price {
+        display: block;
+    }
+    .product__box .product__info .product__info-price .old-price {
+        font-size: 12px;
+        color: #716b6b;
+        text-decoration: line-through;
+    }
+    .flash-sale .flickity-prev-next-button {
+        display: none;
+    }
+
+    .product__box .product__info .product__info-rating .rating_text {
+        display: block;
+        padding: 5px 0 5px 2px;
+        margin: 0;
+    }
+    .product__box .product__info .product__info-name {
+        margin-bottom: 5px;
+    }
+    .product__box .product__info .product__info-name h3 {
+        font-size: 12px;
+    }
+    
+} 

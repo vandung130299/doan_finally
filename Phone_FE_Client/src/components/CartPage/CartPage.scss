@@ -1,0 +1,85 @@
+.test {
+    margin-top: 100px;
+}
+
+.cart-page {
+    .module {
+        display: flex;
+        width: 75%;
+        margin: 15px auto;
+        align-items: center;
+        justify-content: space-between;
+        .left {
+            a {
+                color: rgb(204, 19, 19);
+            }
+        }
+        .right {
+        }
+    }
+    .totalPriceCart {
+        display: flex;
+        justify-content: flex-end;
+        .total_title {
+            color:#38b129;
+            margin-right: 15px;
+        }
+        .total_price {
+            color:#433399;
+        }
+    }
+}
+
+/* CSS */
+.button-5 {
+    display: inline-flex;
+    align-items: center;
+    background-color: #5175d8;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    padding: 10px;
+    cursor: pointer;
+}
+.button-5.btn-delete {
+    background-color: #fa6400;
+    height: 37px;
+    margin-top: 20px;
+}
+
+.button-5:hover,
+.button-5:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+    transform: translateY(-1px);
+}
+
+.button-5:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    transform: translateY(0);
+}
+
+.box-button {
+    width: 20%;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 1rem;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.box-button-buy {
+    background: linear-gradient(#56c241, #e11b1e);
+    border: solid 1px #43bd2b;
+}

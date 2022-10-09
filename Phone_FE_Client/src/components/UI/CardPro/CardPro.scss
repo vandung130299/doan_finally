@@ -1,0 +1,137 @@
+.card__pro {
+    height: 100%;
+    // margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 30%);
+        -webkit-transform: scale(1.02);
+        transform: scale(1.02);
+        z-index: 1;
+    }
+    .box__image {
+        margin: 10px auto;
+        min-width: 120px;
+        min-height: 120px;
+        max-width: 160px;
+        max-height: 160px;
+        // mobile 120
+        a {
+            cursor: pointer;
+            img {
+            }
+        }
+    }
+    .box__percent {
+        position: absolute;
+        width: 32%;
+        height: 24px;
+        clip-path: polygon(81% 0, 100% 50%, 81% 100%, 0% 100%, 8% 50%, 0% 0%);
+        background-color: red;
+        color: white;
+        top: 0;
+        left: 0;
+        p {
+            height: 100%;
+            margin-left: 20%;
+            width: 50%;
+            font-size: 14px;
+        }
+    }
+    .box__name {
+        margin-bottom: 10px;
+        a {
+            cursor: pointer;
+            h3 {
+                font-size: 14px;
+                font-weight: 700;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    }
+    .box__info {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        p {
+            padding: 2px 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: #ffffff;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-right: 5px;
+
+            &:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+    .box__info.stock {
+        margin-bottom: 10px;
+        p {
+            border-color: #d70018;
+            background: #fef2f2;
+            text-transform: uppercase;
+            color: #d70018;
+        }
+    }
+    .box__price {
+        margin-bottom: 10px;
+
+        .special__price {
+            display: inline-block;
+            color: #d70018;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .old__price {
+            display: inline-block;
+            padding-left: 10px;
+            font-size: 12px;
+            line-height: 1.4;
+            text-decoration: line-through;
+            color: #707070;
+        }
+    }
+    .box__promotion {
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #e5e7eb;
+        background: #f3f4f6;
+        p {
+            font-size: 12px;
+            line-height: 1.5;
+            text-transform: none;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+    .box__rating {
+        margin-bottom: 10px;
+
+        i {
+        }
+        i.checked {
+            color: #f59e0b;
+        }
+        .rating_text {
+            margin-left: 5px;
+            font-size: 12px;
+            line-height: 1.6
+        }
+    }
+}

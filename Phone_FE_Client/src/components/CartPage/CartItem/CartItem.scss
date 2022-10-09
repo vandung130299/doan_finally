@@ -1,0 +1,88 @@
+.cartItemContainer {
+    margin: 15px auto;
+    width: 75%;
+    .flexRow {
+        display: flex;
+        .cartProImgContainer {
+            width: 200px;
+            height: 112px;
+            overflow: hidden;
+            text-align: center;
+            margin-left: 25px;
+        }
+        .cartItemDetails {
+            margin-left: 25px;
+            width: 388px;
+            overflow: hidden;
+            .cartItemInfo {
+                .cartItem-name {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: rgb(40, 48, 39);
+                }
+                .cartItem-price {
+                    font-size: 14px;
+                    color: rgb(155, 107, 52);
+                }
+            }
+            .quantityControl {
+                margin-top: 10px;
+                display: flex;
+                height: 20px;
+                .inp {
+                    background: #fff;
+                    padding: 5px;
+                    height: 20px;
+                    width: 50px;
+                    /* align-items: center; */
+                    margin-left: 5px;
+                }
+            }
+        }
+        .totalPrice {
+            margin-left: 25px;
+            .totalPrice__name {
+                font-size: 16px;
+                font-weight: 700;
+                color: #812222;
+            }
+            .totalPrice__price {
+                font-size: 14px;
+                color: rgb(155, 107, 52);
+            }
+        }
+    }
+}
+
+/* CSS */
+.button-5 {
+    display: inline-flex;
+    align-items: center;
+    background-color: #5175d8;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    padding: 10px;
+    cursor: pointer;
+}
+.button-5.btn-delete {
+    background-color: #fa6400;
+    height: 37px;
+    margin-top: 20px;
+}
+
+.button-5:hover,
+.button-5:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+    transform: translateY(-1px);
+}
+
+.button-5:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    transform: translateY(0);
+}

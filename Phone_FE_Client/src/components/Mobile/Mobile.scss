@@ -1,0 +1,179 @@
+.test {
+    margin-top: 100px;
+}
+
+.page_mobile {
+    .slide_mobile {
+        a {
+            width: 100%;
+            height: 100%;
+            display: block;
+            // overflow: hidden;
+
+            img {
+                width: 100%;
+                vertical-align: middle;
+            }
+        }
+        .slick-prev {
+            left: 0;
+            z-index: 1;
+        }
+
+        .slick-next {
+            right: 0px;
+        }
+        .slick-list {
+            border-radius: 10px;
+        }
+
+        .slick-dots {
+            bottom: 9px;
+            li {
+                width: 9px;
+                button {
+                    &:before {
+                        color: white;
+                        font-size: 9px;
+                    }
+                }
+            }
+            li.slick-active {
+                button {
+                    &:before {
+                        /* opacity: .75; */
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+    .list_subcate-box {
+        margin-top: 10px;
+        .list_subcate {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            .subcate_item {
+                display: block;
+                margin: 0 10px 10px 0;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid #caaeae;
+                a {
+                    p {
+                        height: 15px;
+                        color: #333333;
+                        font-size: 14px;
+                        font-weight: bold;
+                        line-height: 100%;
+                    }
+                    img {
+                        height: 15px;
+                    }
+                }
+            }
+        }
+    }
+    .block_filter {
+        margin-top: 10px;
+        .block_filter-list {
+            .block_filter__tittle {
+                line-height: 1.6;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .list_filter {
+            }
+        }
+        .block_filter-sort {
+            .block_filter__tittle {
+                line-height: 1.6;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .list_sort {
+            }
+        }
+        .box_list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    }
+    .product_wrapper {
+        .col {
+            .product_list {
+                .col {
+                    .product_item {
+                        height: 100%;
+                    }
+                }
+            }
+            .more_product {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+                margin-bottom: 15px;
+                
+                .btn_load_more {
+                    width: 100%;
+                    max-width: 335px;
+                    height: 34px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: #ffffff;
+                    font-size: 14px;
+                    color: #212529;
+                    text-decoration: none;
+                    cursor: pointer;
+                    box-shadow: rgb(60 64 67 / 10%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+                    border-radius: 10px;
+                    i {
+                        margin-left: 10px;
+                    }
+                    &:hover{
+                        border: 1px solid #D70018;
+                        background: #FEF2F2;
+                        color: #D70018;
+                    }
+                }
+               
+            }
+        }
+    }
+}
+
+.slick-initialized .slick-slide {
+    div {
+        display: block !important;
+    }
+}
+
+@media (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+    .page_mobile .block_filter .box_list {
+        // flex-wrap: nowrap;
+        // overflow-x: auto;
+    }
+}
+
+/* Tablet */
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+/* MObile & Tablet */
+
+@media (max-width: 1023px) {
+    .hide-on-mobile-tablet {
+        display: none;
+    }
+}
