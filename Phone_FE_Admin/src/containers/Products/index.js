@@ -158,20 +158,20 @@ const Products = (props) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên Sản Phẩm</th>
-                        <th>Giá</th>
-                        <th>Số Lượng</th>
-                        <th>Số Lượng Đã Bán</th>
-                        <th>Danh Mục</th>
-                        <th>Nhãn Hiệu</th>
-                        <th>Action</th>
+                        <th>Product name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Sold</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         product.products.length > 0 ?
                             product.products.map((product, index) =>
-                                <tr key={product._id}>
+                                <tr key={product.id}>
                                     <td>{index + 1}</td>
                                     <td>{product.productname}</td>
                                     <td>{formatCash(product.price)} ₫ </td>
@@ -190,12 +190,12 @@ const Products = (props) => {
 
 
                                     <td style={{ display: 'flex' }}>
-                                        <Button variant="primary" onClick={() => showProductDetailsModal(product)}>
-                                            Details
+                                        <Button data-toggle="tooltip" data-placement="top" title="View detail order" variant="light" onClick={() => showProductDetailsModal(product)}>
+                                            <i className="fa-solid fa-eye"></i>
                                         </Button>
                                         <div style={{ marginRight: "10px" }}></div>
                                         <Button variant="success" onClick={() => onUpdateProduct(product)}>
-                                            Update
+                                            <i className="fa-solid fa-pen-to-square"></i>
                                         </Button>
                                         <div style={{ marginRight: "10px" }}></div>
                                         <Button
@@ -207,7 +207,7 @@ const Products = (props) => {
                                                 dispatch(deleteProductById(payload));
                                             }}
                                         >
-                                            DELETE
+                                            <i className="fa-solid fa-trash"></i>
                                         </Button>
 
                                     </td>
@@ -225,24 +225,24 @@ const Products = (props) => {
             <NewModal
                 show={show}
                 handleClose={handleClose}
-                modalTitle={'Thêm Sản Phẩm'}
+                modalTitle={'New Product'}
                 handleSave={handleSave}
             >
                 <Input
                     value={productname}
-                    placeholder={'Tên Sản Phẩm'}
+                    placeholder={'Product name'}
                     onChange={(e) => { setProductname(e.target.value) }}
                 />
 
                 <Input
                     type={'number'}
                     value={price}
-                    placeholder={'Giá'}
+                    placeholder={'price'}
                     onChange={(e) => { setPrice(e.target.value) }}
                 />
                 <Input
                     value={infodesign}
-                    placeholder={'Infodesign'}
+                    placeholder={'Specifications'}
                     onChange={(e) => { setInfodesign(e.target.value) }}
                 />
                 <Input
@@ -272,7 +272,7 @@ const Products = (props) => {
                 />
                 <Input
                     value={thietKe}
-                    placeholder={'ThietKe'}
+                    placeholder={'Design'}
                     onChange={(e) => { setThietKe(e.target.value) }}
                 />
                 <Input
@@ -289,23 +289,23 @@ const Products = (props) => {
 
                 <Input
                     type={'select'}
-                    placeholder={'Danh Mục'}
+                    placeholder={'Category'}
                     value={categoryId}
                     onChange={(e) => setCategoryId(e.target.value)}
                 >
                     {category.categories.map(option =>
-                        <option key={option.value} value={option.id}>{option.categoryname}</option>
+                        <option key={option.id} value={option.value}>{option.categoryname}</option>
                     )}
                 </Input>
 
                 <Input
                     type={'select'}
-                    placeholder={'Nhãn Hiệu'}
+                    placeholder={'Brand'}
                     value={brandId}
                     onChange={(e) => setBrandId(e.target.value)}
                 >
                     {brand.brands.map(option =>
-                        <option key={option.value} value={option.id}>{option.brandname}</option>
+                        <option key={option.id} value={option.value}>{option.brandname}</option>
                     )}
                 </Input>
 
@@ -323,38 +323,38 @@ const Products = (props) => {
                 <NewModal
                     show={showUpdateModal}
                     handleClose={closeUpdateProductForm}
-                    modalTitle={'Update Sản Phẩm'}
+                    modalTitle={'Update product'}
                     handleSave={updateProductForm}
                 >
                     <Input
                         value={productItem.productname}
-                        placeholder={'Tên Sản Phẩm'}
+                        placeholder={'product name'}
                         onChange={(e) => { setProductItem({ ...productItem, productname: e.target.value }) }}
                     />
                     <Input
                         type={'number'}
                         value={productItem.total}
-                        placeholder={'Số lượng'}
+                        placeholder={'Quantity'}
                         onChange={(e) => { setProductItem({ ...productItem, total: e.target.value }) }}
                         style={{ display: 'none' }}
                     />
                     <Input
                         type={'number'}
                         value={productItem.sold}
-                        placeholder={'Số lượng đã bán'}
+                        placeholder={'Sold'}
                         onChange={(e) => { setProductItem({ ...productItem, sold: e.target.value }) }}
                         style={{ display: 'none' }}
                     />
                     <Input
                         type={'number'}
                         value={productItem.price}
-                        placeholder={'Giá'}
+                        placeholder={'Price'}
                         onChange={(e) => { setProductItem({ ...productItem, price: e.target.value }) }}
                     />
 
                     <Input
                         value={productItem.infodesign}
-                        placeholder={'Infodesign'}
+                        placeholder={'Specifications'}
                         onChange={(e) => { setProductItem({ ...productItem, infodesign: e.target.value }) }}
                     />
                     <Input
@@ -384,7 +384,7 @@ const Products = (props) => {
                     />
                     <Input
                         value={productItem.thietKe}
-                        placeholder={'ThietKe'}
+                        placeholder={'Design'}
                         onChange={(e) => { setProductItem({ ...productItem, thietKe: e.target.value }) }}
                     />
                     <Input
@@ -430,27 +430,27 @@ const Products = (props) => {
 
                     <Input
                         type={'select'}
-                        placeholder={'Danh Mục'}
+                        // placeholder={'Danh Mục'}
                         onChange={(e) => { setProductItem({ ...productItem, category: { id: e.target.value } }) }}
                         placeholder={productItem.category &&
                             productItem.category.categoryname ?
-                            productItem.category.categoryname : 'Danh Mục Đã Bị Xóa'}
+                            productItem.category.categoryname : 'Category removed!'}
                     >
                         {category.categories.map(option =>
-                            <option key={option.value} value={option.id}>{option.categoryname}</option>
+                            <option key={option.id} value={option.value}>{option.categoryname}</option>
                         )}
                     </Input>
 
                     <Input
                         type={'select'}
-                        placeholder={'Nhãn Hiệu'}
+                        // placeholder={'Nhãn Hiệu'}
                         onChange={(e) => { setProductItem({ ...productItem, brand: { id: e.target.value } }) }}
                         placeholder={productItem.brand &&
                             productItem.brand.brandname ?
-                            productItem.brand.brandname : 'Danh Mục Đã Bị Xóa'}
+                            productItem.brand.brandname : 'Brand removed!'}
                     >
                         {brand.brands.map(option =>
-                            <option key={option.value} value={option.id}>{option.brandname}</option>
+                            <option key={option.id} value={option.value}>{option.brandname}</option>
                         )}
                     </Input>
 
@@ -484,41 +484,41 @@ const Products = (props) => {
             >
                 <Row>
                     <Col md={6}>
-                        <label className="key">Tên Sản Phẩm</label>
+                        <label className="key">Product name</label>
                         <p className="value">{productDetails.productname}</p>
                     </Col>
                     <Col md={6}>
-                        <label className="key">Giá</label>
+                        <label className="key">Price</label>
                         <p className="value">{productDetails.price}  ₫</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <label className="key">Số lượng tổng</label>
+                        <label className="key">Quantity</label>
                         <p className="value">{productDetails.total}</p>
                     </Col>
                     <Col md={6}>
-                        <label className="key">Số lượng đã bán</label>
+                        <label className="key">Sold</label>
                         <p className="value">{productDetails.sold}</p>
                     </Col>
                     <Col md={6}>
-                        <label className="key">Danh mục</label>
+                        <label className="key">Category</label>
                         <p className="value">{productDetails.category.categoryname}</p>
                     </Col>
                     <Col md={6}>
-                        <label className="key">Nhãn Hiệu</label>
+                        <label className="key">Brand</label>
                         <p className="value">{productDetails.brand.brandname}</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <label className="key">Mô tả</label>
+                        <label className="key">Discription</label>
                         <p className="value">{productDetails.infomation}</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col >
-                        <label className="key">Hình ảnh Sản Phẩm</label>
+                        <label className="key">Images</label>
                         <div style={{ display: 'flex' }}>
                             {
                                 <div className="productImgContainer">
@@ -536,18 +536,18 @@ const Products = (props) => {
     return (
         <Layout sidebar>
             <Container >
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <h4>Product Management</h4>
+                </div>
                 <Row>
                     <Col md={12}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Products</h3>
-                            <Button variant="primary" onClick={handleShow}>
-                                Add
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12}>
+                        <button
+                            className='btn-save'
+                            onClick={handleShow}
+                            style={{ float: 'right', marginBottom: 15 }}
+                        >
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
                         {renderProducts()}
                     </Col>
                 </Row>

@@ -55,7 +55,6 @@
 .title{
     font-size: 16px;
     font-weight: 600;
-    color:red;
 }
 .value{
     font-size: 14px;
@@ -69,4 +68,9 @@
 
 .mystyle+tr{
     display: contents;
+}
+.export-pdf{
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }

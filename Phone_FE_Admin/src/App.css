@@ -1,0 +1,20 @@
+.container{
+  max-width: 100%;
+}
+.btn-save{
+  color: #fff;
+  background-color: #00483d;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+.btn-save:hover{
+  color: #fff;
+  background-color: #00483d;
+  opacity: 0.75;
+}
+.btn-save:active, .btn-save:focus{
+  background-color: #00483d;
+}

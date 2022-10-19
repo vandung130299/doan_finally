@@ -15,28 +15,15 @@ import 'react-toastify/dist/ReactToastify.css';
 **/
 
 export const Brand = (props) => {
-
     const brand = useSelector(state => state.brand);
-
     const [showCreateModel, setShowCreateModel] = useState(false);
     const [showUpdateModel, setShowUpdateModel] = useState(false);
     const [_id, setId] = useState("");
     const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
-    const [note, setNote] = useState("");
-
-
-
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (brand.message) {
-            toast(brand.message);
-        }
-    }, [brand.message])
-
-    const handleCloseCreate = () => setShowCreateModel(false);
+    const handleCloseCreate = () => {setShowCreateModel(false); setName('');};
     // const handleSaveCreate = (e) => {
     //     e.preventDefault();
     //     const supplier = { name, address, note };
@@ -46,17 +33,15 @@ export const Brand = (props) => {
     // }
     const handleShowCreate = () => setShowCreateModel(true);
 
-    const handleCloseUpdate = () => setShowUpdateModel(false);
+    const handleCloseUpdate = () => {setShowUpdateModel(false); setName('');}
 
-    // const handleShowUpdate = (supplier) => {
-    //     // e.preventDefault();
-    //     setId(supplier._id)
-    //     // const supplier = {_id, name, address, note };
-    //     setName(supplier.name)
-    //     setAddress(supplier.address)
-    //     setNote(supplier.note)
-    //     setShowUpdateModel(true);
-    // }
+    const handleShowUpdate = (brand) => {
+        // e.preventDefault();
+        setId(brand.id)
+        // const supplier = {_id, name, address, note };
+        setName(brand.brandname)
+        setShowUpdateModel(true);
+    }
 
     // const handleSaveUpdate = (e) => {
     //     e.preventDefault();
@@ -66,14 +51,14 @@ export const Brand = (props) => {
 
     // }
 
-    const renderSupplers = () => {
+    const renderBrand = () => {
         return (
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên Danh Mục</th>
-                        <th>Sửa</th>
+                        <th>Brand name</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,11 +70,17 @@ export const Brand = (props) => {
                                     <td>{brand.brandname}</td>
                                     
                                     <td>
-                                        <Button
-                                            variant="primary"
-                                            // onClick={() => handleShowUpdate(supplier)}
+                                        <button
+                                            className='btn-save mr-2'
+                                            onClick={() => handleShowUpdate(brand)}
                                         >
-                                            Sửa
+                                            <i className="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <Button
+                                            variant="danger"
+                                            // onClick={() => handleDelete(category.id)}
+                                        >
+                                            <i className="fa-solid fa-trash"></i>
                                         </Button>
                                     </td>
 
@@ -103,12 +94,12 @@ export const Brand = (props) => {
     }
 
 
-    const renderCreateSupplier = () => {
+    const renderCreateBrand = () => {
         return (
             <NewModal
                 show={showCreateModel}
                 handleClose={handleCloseCreate}
-                modalTitle={'Tạo Danh Mục Mới'}
+                modalTitle={'New Brand'}
                 // handleSave={handleSaveCreate}
             >
                 <Input
@@ -116,44 +107,22 @@ export const Brand = (props) => {
                     placeholder={'Name'}
                     onChange={(e) => { setName(e.target.value) }}
                 />
-                <Input
-                    value={address}
-                    placeholder={'Address'}
-                    onChange={(e) => { setAddress(e.target.value) }}
-                // errorMessage={'no no'}
-                />
-                <Input
-                    value={note}
-                    placeholder={'Ghi Chú'}
-                    onChange={(e) => { setNote(e.target.value) }}
-                />
-
             </NewModal>
         )
     }
 
-    const renderUpdateSupplier = () => {
+    const renderUpdateBrand = () => {
         return (
             <NewModal
                 show={showUpdateModel}
                 handleClose={handleCloseUpdate}
-                modalTitle={'Cập Nhật Danh Mục'}
+                modalTitle={'Update Brand'}
                 // handleSave={handleSaveUpdate}
             >
                 <Input
                     value={name}
                     placeholder={'Name'}
                     onChange={(e) => { setName(e.target.value) }}
-                />
-                <Input
-                    value={address}
-                    placeholder={'Address'}
-                    onChange={(e) => { setAddress(e.target.value) }}
-                />
-                <Input
-                    value={note}
-                    placeholder={'Note'}
-                    onChange={(e) => { setNote(e.target.value) }}
                 />
             </NewModal>
         )
@@ -162,7 +131,10 @@ export const Brand = (props) => {
     return (
         <Layout sidebar>
             <Container >
-                <Row style={{ marginBottom: '50px' }}>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <h4>Brand Management</h4>
+                </div>
+                {/* <Row style={{ marginBottom: '50px' }}>
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h3>Danh Mục</h3>
@@ -174,18 +146,25 @@ export const Brand = (props) => {
                             </Button>
                         </div>
                     </Col>
-                </Row>
+                </Row> */}
                 <Row>
                     <Col md={12}>
-                        {renderSupplers()}
+                    <button
+                        className='btn-save'
+                        onClick={handleShowCreate}
+                        style={{ float: 'right', marginBottom: 15 }}
+                    >
+                        <i className="fa-solid fa-plus"></i>
+                    </button>
+                        {renderBrand()}
                     </Col>
                 </Row>
             </Container>
 
 
-            {renderCreateSupplier()}
+            {renderCreateBrand()}
 
-            {renderUpdateSupplier()}
+            {renderUpdateBrand()}
 
             <ToastContainer />
 

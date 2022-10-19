@@ -113,4 +113,6 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "Người dùng đã đăng ký thành công"));
     }
+
+
 }

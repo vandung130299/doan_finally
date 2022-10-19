@@ -1,43 +1,36 @@
-import './App.css';
-import { useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Home from './containers/Home';
-import Signin from './containers/Signin';
-import Signup from './containers/Signup';
-import PrivateRoute from './components/HOC/PrivateRoute';
-import { useDispatch, useSelector } from 'react-redux';
-import { getInitialData, isUSerLoggedIn } from './actions';
-import Products from './containers/Products';
-import Orders from './containers/Orders';
-import NewPage from './containers/NewPage';
-import { Account } from './containers/Account';
-import { Supplier } from './containers/Supplier';
-import { Receipt } from './containers/Receipt';
-import { Category } from './containers/Category';
-import { Brand } from './containers/Brand';
-let i=0;
+import "./App.css";
+import { useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+import Signin from "./containers/Signin";
+import Signup from "./containers/Signup";
+import PrivateRoute from "./components/HOC/PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { getInitialData, isUSerLoggedIn } from "./actions";
+import Products from "./containers/Products";
+import Orders from "./containers/Orders";
+import { Account } from "./containers/Account";
+import { Supplier } from "./containers/Supplier";
+import { Receipt } from "./containers/Receipt";
+import { Category } from "./containers/Category";
+import { Brand } from "./containers/Brand";
+import { ToastContainer } from "react-toastify";
+
 function App() {
-console.log('i',i);i=i+1;
 
   const dispatch = useDispatch();
 
-  const auth = useSelector(state => state.auth);
-
-
-  //ComponentDidUpdate
+  const auth = useSelector((state) => state.auth);
+  
   useEffect(() => {
     if (!auth.authenticate) {
-      dispatch(isUSerLoggedIn())
+      dispatch(isUSerLoggedIn(true));
     }
-    //load trc danh muc va product
+    // load trc danh muc va product
     if (auth.authenticate) {
-      dispatch(getInitialData())
+      dispatch(getInitialData());
     }
-    console.log('ddd')
-   console.log('authsds1',auth.authenticate)
-
   }, [auth.authenticate]);
-
 
   return (
     <div className="App">
@@ -55,6 +48,7 @@ console.log('i',i);i=i+1;
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
       </Switch>
+      <ToastContainer />
     </div>
   );
 }

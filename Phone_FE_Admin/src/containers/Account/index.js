@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { createAccountUser, getOrdersByAccountId } from '../../actions';
+import { createAccountUser, getListAccount, getOrdersByAccountId } from '../../actions';
 import Layout from '../../components/Layout'
 import Input from '../../components/UI/Input';
 import NewModal from '../../components/UI/NewModal';
 import './style.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-/**
-* @author
-* @function Account
-**/
+import Loading from '../Loading';
 
 export const Account = (props) => {
 
     const formatCash = (cash) => cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
+    const loading =  useSelector((state) => state.loading);
 
     const account = useSelector(state => state.account);
 
@@ -33,10 +29,8 @@ export const Account = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (account.notification) {
-            toast(account.notification);
-        }
-    }, [account.notification])
+        dispatch(getListAccount())
+    }, []);
 
     const handleCloseCreate = () => setShowCreateModel(false);
     const handleSaveCreate = (e) => {
@@ -138,36 +132,35 @@ export const Account = (props) => {
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Username</th>
                         <th>Email</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Full Name</th>
-                        <th>Xem đơn hàng đã đặt</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        {/* <th>Ordered</th> */}
                     </tr>
                 </thead>
                 <tbody>
                     {
                         account.accounts.length > 0 ?
                             account.accounts.map((account, index) =>
-                                <tr key={account._id}>
+                                <tr key={account.id}>
                                     <td>{index + 1}</td>
+                                    <td>{account.username}</td>
                                     <td>{account.email}</td>
-                                    <td>{account.firstName}</td>
-                                    <td>{account.lastName}</td>
-                                    <td>{account.firstName} {account.lastName}</td>
-                                    <td>
+                                    <td>{account.phone}</td>
+                                    <td>{account.address}</td>
+                                    {/* <td>
                                         <Button
                                             variant="primary"
                                             onClick={() => showOrdersByAccountId(account._id)}
                                         >
                                             Xem đơn hàng
                                         </Button>
-                                    </td>
+                                    </td> */}
 
                                 </tr>
                             ) : null
                     }
-
                 </tbody>
             </Table>
         )
@@ -179,7 +172,7 @@ export const Account = (props) => {
             <NewModal
                 show={showCreateModel}
                 handleClose={handleCloseCreate}
-                modalTitle={'Tạo Tài Khoản Khách Hàng Mới'}
+                modalTitle={'Create account'}
                 handleSave={handleSaveCreate}
             >
                 <Input
@@ -241,39 +234,36 @@ export const Account = (props) => {
     // }
 
     return (
-        <Layout sidebar>
-            <Container >
-                <Row style={{ marginBottom: '50px' }}>
-                    <Col md={12}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Tài Khoản Khách Hàng</h3>
-                            <Button
-                                variant="primary"
+        <>
+            { loading ? <Loading/> : null }
+            <Layout sidebar>
+                <Container>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <h4>Account Management</h4>
+                    </div>
+                    <Row>
+                        <Col md={12}>
+                            <button
+                                className='btn-save'
                                 onClick={handleShowCreate}
+                                style={{ float: 'right', marginBottom: 15 }}
                             >
-                                Tạo Tài Khoản Khách Hàng Mới
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12}>
-                        {renderAccounts()}
-                    </Col>
-                </Row>
-            </Container>
+                                <i className="fa-solid fa-user-plus"></i>
+                            </button>
+                            {renderAccounts()}
+                        </Col>
+                    </Row>
+                </Container>
 
 
-            {renderCreateAccountUser()}
+                {renderCreateAccountUser()}
 
-            {/* {renderUpdateAccountUser()} */}
+                {/* {renderUpdateAccountUser()} */}
 
-            {renderOrdersByAccountId(orderByAccount)}
+                {renderOrdersByAccountId(orderByAccount)}
 
-
-            <ToastContainer />
-
-        </Layout>
+            </Layout>
+        </>
     )
 
 }

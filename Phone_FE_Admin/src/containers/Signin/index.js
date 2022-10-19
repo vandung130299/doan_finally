@@ -5,8 +5,9 @@ import Input from '../../components/UI/Input'
 import {  login } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../Loading'
 /**
 * @author
 * @function Signin
@@ -16,16 +17,8 @@ const Signin = (props) => {
 
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const auth = useSelector(state => state.auth);
-
-    useEffect(() => {
-        if (auth.notification) {
-            toast(auth.notification);
-        }
-    }, [auth.notification])
-    
-
+    const loading =  useSelector((state) => state.loading);
     // su dung dispatch
     const dispatch = useDispatch();
 
@@ -43,6 +36,7 @@ const Signin = (props) => {
 
     return (
         <Layout>
+            { loading ? <Loading/> : null }
             <Container>
                 <Row style={{ marginTop: '150px' }}>
                     <Col md={{ span: 6, offset: 3 }}>
@@ -54,7 +48,6 @@ const Signin = (props) => {
                                 type="text"
                                 onChange={(e) => setUsernameOrEmail(e.target.value)}
                             />
-
                             <Input
                                 label="Password"
                                 placeholder="Password"
@@ -62,7 +55,6 @@ const Signin = (props) => {
                                 type="password"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
@@ -70,7 +62,6 @@ const Signin = (props) => {
                     </Col>
                 </Row>
             </Container>
-            <ToastContainer />
         </Layout>
 
     )

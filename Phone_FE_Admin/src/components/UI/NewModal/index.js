@@ -9,8 +9,8 @@ import { Button, Form, Modal } from 'react-bootstrap'
 const NewModal = (props) => {
     return (
         <Modal size={props.size} show={props.show} onHide={props.handleClose}>
-            <Form onSubmit={props.handleSave} className="needs-validation" novalidate>
-                <Modal.Header closeButton style={{backgroundColor:'#f0932b'}}>
+            <Form onSubmit={props.handleSave} className="needs-validation" noValidate>
+                <Modal.Header closeButton style={{backgroundColor:'#00483d', color: '#fff'}}>
                     <Modal.Title>{props.modalTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -23,16 +23,16 @@ const NewModal = (props) => {
                         </Button>
                     ) :
                         <>
-                            <Button Button variant="secondary" onClick={props.handleClose}>
-                                Thoát
-                            </Button>
                             {
                                 props.handleSave ?
-                                    <Button variant="primary" type="submit" >
-                                        Lưu
+                                    <Button className='btn-save' type="submit" >
+                                        Save
                                     </Button>
                                     : null
                             }
+                            <Button Button variant="outline-danger" onClick={props.handleClose}>
+                                Close
+                            </Button>
                         </>
                     }
 

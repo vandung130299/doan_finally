@@ -1,19 +1,23 @@
 import axiosInstance from "../helpers/axios";
 import { accountConstants } from "./constants";
+import { toast } from 'react-toastify';
 
 export const getListAccount = () => {
     return async dispatch => {
-        dispatch({ type: accountConstants.GET_ALL_ACCOUNT_REQUEST });
-        const res = await axiosInstance.get('/account/getListAccount');
-        if (res.status === 200) {
-            const { accounts } = res.data;
-            dispatch({
-                type: accountConstants.GET_ALL_ACCOUNT_SUCCESS,
-                payload: { accounts }
-            })
-
-        }
-        console.log(res)
+        dispatch({ type: 'LOADING' , loading: true});
+        axiosInstance.get('/account/all').then((res)=>{
+            dispatch({ type: 'LOADING' , loading: false});
+            if (res.status === 200) {
+                const { users } = res.data;
+                dispatch({
+                    type: accountConstants.GET_ALL_ACCOUNT_SUCCESS,
+                    payload: { accounts: users }
+                })
+            }
+        }).catch(err => {
+            dispatch({ type: 'LOADING' , loading: false});
+            toast.error('No results returned!');
+        });
     }
 }
 

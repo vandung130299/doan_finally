@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/phone-shop/static/css/main.96cf9c43.chunk.css",
+    "main.js": "/phone-shop/static/js/main.1d539fe1.chunk.js",
+    "main.js.map": "/phone-shop/static/js/main.1d539fe1.chunk.js.map",
+    "runtime-main.js": "/phone-shop/static/js/runtime-main.2df9e6ea.js",
+    "runtime-main.js.map": "/phone-shop/static/js/runtime-main.2df9e6ea.js.map",
+    "static/js/2.f67bc3b5.chunk.js": "/phone-shop/static/js/2.f67bc3b5.chunk.js",
+    "static/js/2.f67bc3b5.chunk.js.map": "/phone-shop/static/js/2.f67bc3b5.chunk.js.map",
+    "index.html": "/phone-shop/index.html",
+    "static/css/main.96cf9c43.chunk.css.map": "/phone-shop/static/css/main.96cf9c43.chunk.css.map",
+    "static/js/2.f67bc3b5.chunk.js.LICENSE.txt": "/phone-shop/static/js/2.f67bc3b5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2df9e6ea.js",
+    "static/js/2.f67bc3b5.chunk.js",
+    "static/css/main.96cf9c43.chunk.css",
+    "static/js/main.1d539fe1.chunk.js"
+  ]
+}

@@ -3,8 +3,8 @@ import { Col, Container, Jumbotron, Row } from 'react-bootstrap'
 import { authConstants } from '../../actions/constants';
 import Layout from '../../components/Layout';
 import './style.css'
-import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import Chart from '../Chart/chart';
 
 /**
 * @author
@@ -12,15 +12,9 @@ import { useSelector } from 'react-redux';
 **/
 
 const Home = (props) => {
-
     const formatCash = (cash) => cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
     const receipt = useSelector(state => state.receipt)
     const order = useSelector(state => state.order)
-
-    // totalItem={Object.keys(cart.cartItems).reduce(function (qty, key) {
-    //     return qty + cart.cartItems[key].qty;
-    // }, 0)}
     let totalReceipt =
         receipt.receipts.reduce((totalReceipt, item) => {
             return totalReceipt + item.totalmoney
@@ -31,18 +25,27 @@ const Home = (props) => {
 
             return totalOrder + item.totalmoney
         }, 0)
-
-
-    console.log(`Order`, totalReceipt)
-
     return (
         <Layout sidebar>
             <Container >
                 <Row>
+                    <Col md={6} >
+                        <Chart/>
+                    </Col>
+                    <Col md={6} >
+                        <Chart/>
+                    </Col>
+                    <Col md={6} >
+                        <Chart/>
+                    </Col>
+                    <Col md={6} >
+                        <Chart/>
+                    </Col>
+                </Row>
+                {/* <Row>
                     <Col>
                         <h3>--------</h3>
                     </Col>
-
                 </Row>
                 <Row>
                     <Col>
@@ -63,15 +66,10 @@ const Home = (props) => {
                     <Col>
                         <h3>--------</h3>
                     </Col>
-
-                </Row>
-
-
+                </Row> */}
             </Container>
-
         </Layout>
     )
-
 }
 
 export default Home

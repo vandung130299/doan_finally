@@ -8,11 +8,7 @@ import NewModal from '../../components/UI/NewModal';
 import './style.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-/**
-* @author
-* @function Receipt
-**/
+import ModalReceipt from './modal';
 
 export const Receipt = (props) => {
     const formatCash = (cash) => cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -20,6 +16,8 @@ export const Receipt = (props) => {
 
     const receipt = useSelector(state => state.receipt);
     const product = useSelector(state => state.product);
+
+    const [receiptDetail, setReceiptDetail] = useState(null);
 
     const [showCreateModel, setShowCreateModel] = useState(false);
     const [showCreateModel2, setShowCreateModel2] = useState(false);
@@ -36,10 +34,20 @@ export const Receipt = (props) => {
 
     const dispatch = useDispatch();
 
-    const toggleClass = (e) => {
-        const tag = e.target.parentElement.parentElement
-        tag.classList.toggle("mystyle");
+    const showReceiptDetails = (receipt) => {
+        setReceiptDetail(receipt);
     };
+
+    const closeModal=() => {
+        setReceiptDetail(null);
+    }
+
+    const renderOrderDetails = () => {
+        if(receiptDetail) {
+        return <ModalReceipt receiptDetail={receiptDetail} closeModal={closeModal}/>
+        }
+        return null;
+    }
 
 
     const handleCloseCreate = () => setShowCreateModel(false);
@@ -100,13 +108,13 @@ export const Receipt = (props) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Mã đơn Nhập</th>
-                        <th>Công Ty</th>
-                        <th>Địa Chỉ</th>
-                        <th>Ngày Nhập</th>
-                        <th>Số Loại SP</th>
-                        <th>Tổng Giá</th>
-                        <th>Chi tiết</th>
+                        <th>Code</th>
+                        <th>Company</th>
+                        <th>Address</th>
+                        <th>Receipt date</th>
+                        <th>Quantity</th>
+                        <th>Total price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,39 +133,12 @@ export const Receipt = (props) => {
                                         <td>{formatCash(receipt.totalmoney)}  ₫</td>
                                         <td>
                                             <Button
-                                                variant="primary"
-                                                onClick={(e) => { toggleClass(e) }}
+                                                variant="light"
+                                                onClick={(e) => { showReceiptDetails(receipt) }}
+                                                data-toggle="tooltip" data-placement="top" title="View detail receipt"
                                             >
-                                                Details
+                                                <i className="fa-solid fa-eye"></i>
                                             </Button>
-                                        </td>
-                                    </tr>
-                                    <tr className="hidden">
-                                        <td colspan="8">
-                                            <div>
-                                                <Table variant="parimary">
-                                                    <thead>
-                                                        <tr>
-                                                            <th className="title"></th>
-                                                            <th className="title">Tên Sản Phẩm</th>
-                                                            <th className="title">Hình Ảnh</th>
-                                                            <th className="title">Giá Nhập</th>
-                                                            <th className="title">Số Lượng</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {receipt.receiptItems.map((item, index) => (
-                                                            <tr key={index}>
-                                                                <td className="value">{index + 1}</td>
-                                                                <td className="value">{item.productname}</td>
-                                                                <td className="value"><img width="50px" height="50px" src={item.imageurl} alt={item.productname} /></td>
-                                                                <td className="value">{formatCash(item.pricereceipt)} ₫</td>
-                                                                <td className="value">{item.quantity}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </Table>
-                                            </div>
                                         </td>
                                     </tr>
                                 </>
@@ -177,38 +158,39 @@ export const Receipt = (props) => {
                 size={'lg'}
                 show={showCreateModel}
                 handleClose={handleCloseCreate}
-                modalTitle={'Tạo Đơn Nhập Hàng Mới'}
+                modalTitle={'New Receipt'}
                 handleSave={handleSaveCreate}
             >
 
                 <Input
                     type={'text'}
-                    label={'Công ty'}
+                    label={'Company'}
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    placeholder={'Công ty'}
+                    placeholder={'Company'}
                 />
                 <Input
                     type={'text'}
-                    label={'Địa Chỉ'}
+                    label={'Address'}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    placeholder={'Địa Chỉ'}
+                    placeholder={'Address'}
                 />
                 <Input
                     type={'text'}
-                    label={'Số Điện Thoại'}
+                    label={'Phone'}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder={'Số Điện Thoại'}
+                    placeholder={'Phone'}
                 />
 
 
                 <Input
                     type={'number'}
-                    label={'So luong mat hang'}
+                    label={'Quantity'}
                     value={sl}
                     onChange={(e) => { setSl(e.target.value); }}
+                    placeholder={'Quantity'}
                 />
 
             </NewModal>
@@ -248,8 +230,8 @@ export const Receipt = (props) => {
 
                 {JSON.stringify(arrayProduct)}
                 {
-                    bang.map((x) => <>
-                        <Row>
+                    bang.map((x, index) => <>
+                        <Row key={index}>
                             <Col>
                                 <Input
                                     type={'select'}
@@ -259,7 +241,7 @@ export const Receipt = (props) => {
                                     placeholder={'Select Product Parent'}
                                 >
                                     {product.products.map(option =>
-                                        <option key={option.value} value={option.id}>{option.productname}</option>
+                                        <option key={option.id} value={option.value}>{option.productname}</option>
                                     )}
                                 </Input>
                             </Col>
@@ -290,7 +272,10 @@ export const Receipt = (props) => {
     return (
         <Layout sidebar>
             <Container >
-                <Row style={{ marginBottom: '50px' }}>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <h4>Receipt Management</h4>
+                </div>
+                {/* <Row style={{ marginBottom: '50px' }}>
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h3>Hoá Đơn Nhập Hàng</h3>
@@ -302,9 +287,16 @@ export const Receipt = (props) => {
                             </Button>
                         </div>
                     </Col>
-                </Row>
+                </Row> */}
                 <Row>
                     <Col md={12}>
+                        <button
+                            className='btn-save'
+                            onClick={handleShowCreate}
+                            style={{ float: 'right', marginBottom: 15 }}
+                        >
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
                         {renderReceipts()}
                     </Col>
                 </Row>
@@ -313,7 +305,7 @@ export const Receipt = (props) => {
 
             {renderCreateReceipt()}
             {renderCreateReceipt2()}
-
+            {receiptDetail ? renderOrderDetails() : null}
 
             <ToastContainer />
 

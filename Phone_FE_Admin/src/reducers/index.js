@@ -9,6 +9,7 @@ import accountReducer from "./account.reducer";
 import supplierReducer from "./supplier.reducer";
 import receiptReducer from "./receipt.reducer";
 import { combineReducers } from "redux";
+import loadingReducer from "./loading.reducer";
 
 const rootReducer =  combineReducers({
     auth: authReducer,
@@ -21,6 +22,7 @@ const rootReducer =  combineReducers({
     account: accountReducer,
     supplier: supplierReducer,
     receipt: receiptReducer,
+    loading: loadingReducer
 })
 
 export default rootReducer;

@@ -1,0 +1,264 @@
+header .header__top {
+    width: 100%;
+    height: 30px;
+    background-color: #00483d;
+  }
+  header .header__top .container {
+    height: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  
+  header .header__top .container .menu-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    color: #fff;
+    list-style: none;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  header .header__top .container .menu-list li {
+    padding: 0 6px;
+  }
+  
+  header .header__top .container .menu-list li a {
+    cursor: pointer;
+    color: #fff;
+  }
+  header .header__top .container .menu-list li a:hover {
+    cursor: pointer;
+    color: #7fd6cb;
+  }
+  
+  header .header__main {
+    width: 100%;
+  }
+  .container.header1{
+    display: none;
+  }
+  header .header__main .container {
+    height: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  
+  header .header__main .container .header__logo img {
+    height: 70px;
+    width: auto;
+  }
+  
+  .header__search {
+    padding-top: 5px;
+    position: relative;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  
+  header .header__main .container .header__search input {
+    color: #333;
+    font-weight: bold;
+    margin-left: 10%;
+    width: 82%;
+    padding: 12px 10px;
+    border: 0;
+    border-radius: 12px;
+    outline: none;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  }
+  
+  header .header__main .container .header__search--icon {
+    position: absolute;
+    top: -5px;
+    left: 85%;
+    width: 42px;
+    height: 42px;
+    border: none;
+    outline: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: #00483d;
+    border-radius: 16px;
+  }
+  
+  header .header__main .container .header__search--icon:hover {
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    cursor: pointer;
+    top: -2px;
+  }
+  
+  header .header__main .container .header__search--icon i {
+    color: #fff;
+    font-size: 15px;
+  }
+  
+  header .header__main .container .header__search .header__search__list {
+    display: none;
+    overflow-y: auto;
+    max-height: 40vh;
+    z-index: 2;
+    background-color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    left: 11%;
+    width: 80%;
+    top: 135%;
+    list-style: none;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  }
+  header .header__main .container .header__search::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height:45px;
+    bottom:-40px;
+  }
+  header .header__main .container .header__search:hover .header__search__list{
+    display: block;
+  }
+  
+  
+  header .header__main .container .header__search .header__search__list .header__search__item {
+    border-bottom: 1px solid #e6e4e4;
+  }
+  
+  header .header__main .container .header__search .header__search__list .header__search__item:hover {
+    background-color: #f4f4f4;
+  }
+  
+  header .header__main .container .header__search .header__search__list .header__search__item a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-decoration: none;
+  }
+  header .header__main .container .header__search .header__search__list .header__search__item a .item__img img{
+    width: 70px;
+    height: 70px;
+  }
+  header .header__main .container .header__search .header__search__list .header__search__item a .item__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  
+  header .header__main .container .header__search .header__search__list .header__search__item a .item__content h4 {
+    font-size: 1.6rem;
+    color: #000;
+  }
+  
+  header .header__main .container .header__search .header__search__list .header__search__item a .item__content span {
+    padding-top: 0px;
+    color: #fd475a;
+  }
+  
+  header .header__main .container .header__contact {
+    width: 150px;
+    height: 50px;
+    background-color: #00483d;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 8px;
+    margin: 0 30px;
+  }
+  
+  header .header__main .container .header__contact span {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: #fff;
+  }
+  
+  header .header__main .container .header__cart {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  header .header__main .container .header__cart i {
+    font-size: 35px;
+    color: #00483d;
+  }
+  
+  header .header__main .container .header__cart i:hover {
+    cursor: pointer;
+  }
+  
+  header .header__main .container .header__cart span {
+    position: relative;
+    text-align: center;
+    border-radius: 3px;
+    font-weight: 300;
+    margin-left: 8px;
+    max-height: 20px;
+    display: block;
+    padding: 3px 7px;
+    min-width: 15px;
+    background-color: #ff6801;
+    color: #fff;
+  }
+  
+  header .header__main .container .header__cart span::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    border-right: 8px solid #ff6801;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+  }
+
+
+
+
+  

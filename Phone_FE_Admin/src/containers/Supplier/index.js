@@ -72,17 +72,17 @@ export const Supplier = (props) => {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên Nhà Cung Cấp</th>
-                        <th>Địa Chỉ</th>
-                        <th>Ghi Chú</th>
-                        <th>Sửa</th>
+                        <th>Supplier name</th>
+                        <th>Address</th>
+                        <th>Note</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         supplier.suppliers ?
                             supplier.suppliers.map((supplier, index) =>
-                                <tr key={supplier._id}>
+                                <tr key={supplier.id}>
                                     <td>{index + 1}</td>
                                     <td>{supplier.name}</td>
                                     <td>{supplier.address}</td>
@@ -111,7 +111,7 @@ export const Supplier = (props) => {
             <NewModal
                 show={showCreateModel}
                 handleClose={handleCloseCreate}
-                modalTitle={'Tạo Nhà Cung Cấp Mới'}
+                modalTitle={'New Supplier'}
                 handleSave={handleSaveCreate}
             >
                 <Input
@@ -127,7 +127,7 @@ export const Supplier = (props) => {
                 />
                 <Input
                     value={note}
-                    placeholder={'Ghi Chú'}
+                    placeholder={'Note'}
                     onChange={(e) => { setNote(e.target.value) }}
                 />
 
@@ -140,7 +140,7 @@ export const Supplier = (props) => {
             <NewModal
                 show={showUpdateModel}
                 handleClose={handleCloseUpdate}
-                modalTitle={'Cập Nhật Nhà Cung Cấp'}
+                modalTitle={'Update Supplier'}
                 handleSave={handleSaveUpdate}
             >
                 <Input
@@ -165,21 +165,18 @@ export const Supplier = (props) => {
     return (
         <Layout sidebar>
             <Container >
-                <Row style={{ marginBottom: '50px' }}>
-                    <Col md={12}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h3>Nhà Cung Cấp</h3>
-                            <Button
-                                variant="primary"
-                                onClick={handleShowCreate}
-                            >
-                                Tạo Nhà Cung Cấp Mới
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <h4>Supplier Management</h4>
+                </div>
                 <Row>
                     <Col md={12}>
+                        <button
+                            className='btn-save'
+                            onClick={handleShowCreate}
+                            style={{ float: 'right', marginBottom: 15 }}
+                        >
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
                         {renderSupplers()}
                     </Col>
                 </Row>

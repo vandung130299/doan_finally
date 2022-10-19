@@ -1,0 +1,77 @@
+
+.footer {
+    margin: 35px 0 25px;
+    border-top: 4px solid #00483d;
+    padding-top: 12px;
+  }
+  
+  .footer__heading {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #00483d;
+    padding: 10px 0;
+  }
+  
+  .footer-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .footer-item__link {
+    display: block;
+    text-decoration: none;
+    color: #737373;
+    font-size: 1.2rem;
+    padding: 4px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  
+  .footer-item__link:hover {
+    color: var(--primary-color);
+  }
+  
+  .footer-item__link-icon {
+    font-size: 1.4rem;
+    padding-right: 8px;
+  }
+  
+  .footer__download {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .footer__download-qr {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--border-color);
+  }
+  
+  .footer__download-apps {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin-left: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  
+  .footer__download-app-img {
+    height: 16px;
+  }
+  
+  
