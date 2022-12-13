@@ -14,12 +14,12 @@ function NavbarContainer(props) {
         dispatch(getAllBrand());
     }, [])
 
-    const showMenuBrands = (myBrands, categorySlug) => {
+    const showMenuBrands = (myBrands, categoryID) => {
         let output = null;
         if (myBrands && myBrands.length > 0) {
             output = myBrands.map((brand, index) => {
                 return (<li key={index}>
-                    <a style={{color:'black'}} href={`/${categorySlug}/${brand.slug}`}>{brand.name}</a>
+                    <a style={{color:'black'}} href={`/?category=${categoryID}&brand=${brand.id}`}>{brand.brandname}</a>
                 </li>);
             })
         }
@@ -27,19 +27,16 @@ function NavbarContainer(props) {
     }
     const showNavbar = (categories, brands) => {
         let output = null;
-        output = categories.map((category) => {
-            let myBrands = brands.filter((brand) => {
-                return brand.category === category._id;
-            });
-            return (<li key={category._id}>
-                <a href={`/${category.slug}`}>
+        output = categories.map((category, index) => {
+            return (<li key={index}>
+                <a href={`/?category=${category.id}`}>
                     <i className={category.icon}></i>
-                    <span className="mb-0">{category.name}</span>
+                    <span className="mb-0">{category.categoryname}</span>
                 </a>
                 <div className="catalog">
                     <h4>HÃNG SẢN XUẤT</h4>
                     <ul className="list__product">
-                        {showMenuBrands(myBrands, category.slug)}
+                        {showMenuBrands(brands, category.id)}
                     </ul>
                 </div>
             </li>)

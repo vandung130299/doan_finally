@@ -13,23 +13,23 @@ export default (state = initState, action) => {
     case userConstants.GET_USER_ORDER_REQUEST:
       state = {
         ...state,
-        orderFetching: true,
+        orders: action.payload.orders
       };
       break;
-    case userConstants.GET_USER_ORDER_SUCCESS:
-      state = {
-        ...state,
-        orders: action.payload.orders,
-        orderFetching: false,
-      };
-      break;
-    case userConstants.GET_USER_ORDER_FAILURE:
-      state = {
-        ...state,
-        error: action.payload.error,
-        orderFetching: false,
-      };
-      break;
+    // case userConstants.GET_USER_ORDER_SUCCESS:
+    //   state = {
+    //     ...state,
+    //     orders: action.payload.orders,
+    //     orderFetching: false,
+    //   };
+    //   break;
+    // case userConstants.GET_USER_ORDER_FAILURE:
+    //   state = {
+    //     ...state,
+    //     error: action.payload.error,
+    //     orderFetching: false,
+    //   };
+    //   break;
     // case userConstants.GET_USER_ORDER_DETAILS_REQUEST:
     //   break;
     // case userConstants.GET_USER_ORDER_DETAILS_SUCCESS:

@@ -10,6 +10,7 @@ public class CartResponse {
 	public static class CartItemResponse {
 		private long productid;
 		private int quantity;
+		private int productQuantity;
 		private String productname;
 		private String imageurl;
 		private long price;
@@ -43,6 +44,13 @@ public class CartResponse {
 		}
 		public void setQuantity(int quantity) {
 			this.quantity = quantity;
+		}
+
+		public int getProductQuantity() {
+			return productQuantity;
+		}
+		public void setProductQuantity(int productQuantity) {
+			this.productQuantity = productQuantity;
 		}
 		
 	}

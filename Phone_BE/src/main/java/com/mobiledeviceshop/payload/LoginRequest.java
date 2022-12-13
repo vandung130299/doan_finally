@@ -6,11 +6,16 @@ public class LoginRequest {
     @NotBlank
     private String usernameOrEmail;
 
+    public LoginRequest(String usernameOrEmail, String password) {
+        this.usernameOrEmail = usernameOrEmail;
+        this.password = password;
+    }
+
     @NotBlank
     private String password;
 
     public String getUsernameOrEmail() {
-        return usernameOrEmail;
+        return this.usernameOrEmail;
     }
 
     public void setUsernameOrEmail(String usernameOrEmail) {

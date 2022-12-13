@@ -3,40 +3,23 @@ import { authConstants } from "./../constants/ActionTypes";
 const initState = {
   token: null,
   user: {
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
-    picture: '',
-    role: ''
+    role: '',
+    address: '',
+    phone: ''
   },
-  authenticate: false,
-  authenticating: false,
-  loading: false,
-  error: null,
-  message: ''
+  authenticate: false
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case authConstants.LOGIN_REQUEST:
-      state = {
-        ...state,
-        authenticating: true
-      }
-      break;
     case authConstants.LOGIN_SUCCESS:
       state = {
         ...state,
-        user: action.payload.user,
+        user: { ...action?.payload?.user},
         token: action.payload.token,
         authenticate: true,
-        authenticating: false
-      }
-      break;
-    case authConstants.LOGOUT_REQUEST:
-      state = {
-        ...state,
-        loading: true
       }
       break;
     case authConstants.LOGOUT_SUCCESS:
@@ -44,23 +27,14 @@ export default (state = initState, action) => {
         ...initState
       }
       break;
-    case authConstants.LOGOUT_FAILURE:
-      state = {
-        ...state,
-        error: action.payload.error,
-        loading: false
-      }
-      break;
     case authConstants.UPDATE_USER_SUCCESS:
       state = {
         ...state,
         user: action.payload.user,
-        loading: false
+        loading: false,
+        authenticate: true,
       }
       break;
-
   }
-
-
   return state;
 }

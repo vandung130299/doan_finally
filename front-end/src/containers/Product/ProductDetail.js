@@ -9,19 +9,14 @@ import { getCarts, updateCart, addToCart } from '../../actions';
 
 function ProductDetailContainer(props) {
   const [product, setProduct] = useState({
-    _id: '',
-    name: '',
+    id: '',
+    productname: '',
     price: 0,
-    quantity: 0,
-    description: '',
+    total: 0,
     offer: 0,
-    productPictures: [{
-      img: ''
-    }],
-    details: [],
-    brand: {
-      name: ''
-    }
+    imageurl: '',
+    infodesign:'',
+    sold: 0 
   });
   const [count, setCount] = useState(1);
   const dispatch = useDispatch();
@@ -32,12 +27,12 @@ function ProductDetailContainer(props) {
     let { slug } = props.match.params;
     axios.get(`/product/${slug}`)
       .then(res => {
-        setProduct(res.data.product)
+        setProduct(res.data)
       })
   }, []);
 
   const setCountNumber = (number) => {
-    if (count + number <= product.quantity && count + number > 0) {
+    if (count + number <= product.total && count + number > 0) {
       setCount(count + number);
     }
   }
@@ -57,14 +52,15 @@ function ProductDetailContainer(props) {
         e.target.parentElement.classList.add('listImg--active');
       })
     });
-  }, [product.productPictures]);
+  }, [product.imageurl]);
 
-  let showImages = (images) => {
+  let showImages = (image) => {
     let output = null;
+    let images = [image, image, image, image,image]
     if (images) {
       output = images.map((item, index) => {
         return (<li key={index} className="imgHover slide slider_1">
-          <img src={`${api_img}${item.img}`} />
+          <img src={`${item}`} />
         </li>);
       })
     }
@@ -86,13 +82,11 @@ function ProductDetailContainer(props) {
   }
 
   const onAddToCart = () => {
-    const { _id } = product;
-    dispatch(addToCart(_id, count));
+    dispatch(addToCart(product, count, true));
   }
 
   const onBuyNow = () => {
-    const { _id } = product;
-    dispatch(addToCart(_id, count));
+    dispatch(addToCart(product, count));
     props.history.push(`/cart`);
   }
   return (
@@ -101,14 +95,14 @@ function ProductDetailContainer(props) {
         <div className="product--breadcrumb mb-0">
           <span>PhoneShop</span><i className="product--breadcrumb-icon fas fa-chevron-right"></i>
           <span>Phone</span><i className="product--breadcrumb-icon fas fa-chevron-right"></i>
-          <span>{product.brand.name}</span><i className="product--breadcrumb-icon fas fa-chevron-right"></i>
+          <span>{product.brand?.brandname}</span><i className="product--breadcrumb-icon fas fa-chevron-right"></i>
           <span>{product.name}</span>
         </div>
         <div className="app__product">
           <div className="product__info row">
             <div className="product__img col-15 l-4p">
               <div className="showImg">
-                {product.productPictures.length > 0 ? <img className="showImg-active" src={`${api_img}${product.productPictures[0].img}`} /> : null}
+                <img className="showImg-active" src={`${product.imageurl}`} />
               </div>
               <div className="slide-wrap">
                 <input type="radio" name="slider" id="slide11" defaultChecked hidden />
@@ -116,7 +110,7 @@ function ProductDetailContainer(props) {
                 <input type="radio" name="slider" id="slide33" hidden />
                 <input type="radio" name="slider" id="slide44" hidden />
                 <ul id="slides" className="listImg">
-                  {showImages(product.productPictures)}
+                  {showImages(product.imageurl)}
                 </ul>
                 <div id="controls">
                   <label htmlFor="slide11"></label>
@@ -137,7 +131,7 @@ function ProductDetailContainer(props) {
             <div className="product--info col-15 l-6p">
               <div className="product__title">
                 <svg width="34" height="17" className="product__title--mall W86QwR"><g fill="none" fillRule="evenodd"><path d="M.796 2.905A2 2 0 0 1 2.798.911h28.995a2 2 0 0 1 2.003 1.994v12.012a2 2 0 0 1-2.003 1.994H2.798a2 2 0 0 1-2.002-1.994V2.905z" fill="#D0011B"></path><g fill="#fff"><path d="M25.81 10.976h.002c0 .823.31 1.359.931 1.609v.002a.847.847 0 0 1-.63 1.572l-.002.003c-1.332-.464-1.998-1.51-1.998-3.141h.004V4.856a.846.846 0 0 1 1.693 0v6.12zM29.516 10.976h.003c0 .823.31 1.359.93 1.609v.002a.847.847 0 0 1-.63 1.572l-.002.003c-1.332-.464-1.998-1.51-1.998-3.141h.004V4.856a.846.846 0 1 1 1.693 0v6.12zM20.78 7.574c.011-.413.418-.82.918-.82.507 0 .918.418.918.837V13.3c0 .419-.41.826-.918.826-.446 0-.818-.315-.9-.676a3.57 3.57 0 0 1-2.215.768c-1.999 0-3.689-1.644-3.689-3.673 0-2.028 1.69-3.756 3.689-3.756.826 0 1.588.295 2.197.786zm-.08 2.919a2.074 2.074 0 1 0-4.146 0 2.072 2.072 0 1 0 4.145 0z"></path><path d="M3.8 4.645a.824.824 0 0 1 .55-.759c.478-.17.94.18 1.138.587.578 1.19 1.772 2.121 3.374 2.144 1.602.022 2.436-.96 3.057-2.124.215-.403.708-.835 1.277-.607.386.155.539.45.532.732.003.03.005.06.005.09v8.612a.846.846 0 1 1-1.693 0V7.02c-.86.813-1.891 1.333-3.206 1.311a5.477 5.477 0 0 1-3.346-1.237v6.225a.846.846 0 0 1-1.693 0V4.74c0-.032.002-.064.006-.096z" fillRule="nonzero"></path></g></g></svg>
-                <span className="product--name">{product.name}</span>
+                <span className="product--name">{product.productname}</span>
               </div>
               <ul className="product__rating">
                 <li className="product__rating--item separate__lg">
@@ -153,16 +147,16 @@ function ProductDetailContainer(props) {
                   <span className="product__rating--text">Đánh Giá</span>
                 </li>
                 <li className="product__rating--item">
-                  <span className="product__rating--sold--amount"></span>
+                  <span className="product__rating--sold--amount">{product.sold}</span>
                   <span className="product__rating--text">Đã Bán</span>
                 </li>
               </ul>
               <ul className="product__price">
-                <li className="product__price--old product__item--first">
+                {/* <li className="product__price--old product__item--first">
                   {formatVnd(product.price)}
-                </li>
+                </li> */}
                 <li className="product__price--current">
-                  {formatVnd(product.price - (product.price * product.offer / 100))}
+                  {formatVnd(product.price)}
                 </li>
                 <li className="product__price--item">
                   <span className="product__price--discount">{product.offer}% GIẢM</span>
@@ -174,7 +168,7 @@ function ProductDetailContainer(props) {
                 <span className="product__amount--current">{count}</span>
                 <span className="prodct__amount--operator" onClick={() => setCountNumber(1)} id="plus"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" className="shopee-svg-icon icon-plus-sign"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg></span>
                 <span className="prodct__amount--available">
-                  <span id="product__available">{product.quantity} </span>
+                  <span id="product__available">{product.total} </span>
                   <span>sản phẩm có sẵn</span>
                 </span>
               </div>
@@ -209,13 +203,32 @@ function ProductDetailContainer(props) {
             CHI TIẾT SẢN PHẨM
           </div>
           <div className="product__details--list">
-            {showDetails(product.details)}
+            <div className="product__details--item">
+              <span className="product__details--item--title">Nhãn hàng:</span>
+              <span className="product__details--trademark">{product.brand?.brandname}</span>
+            </div>
+            <div className="product__details--item">
+              <span className="product__details--item--title">Thiết kế:</span>
+              <span className="product__details--trademark">{product?.infodesign}</span>
+            </div>
+            <div className="product__details--item">
+              <span className="product__details--item--title">Man hình:</span>
+              <span className="product__details--trademark">{product?.monitor}</span>
+            </div>
+            <div className="product__details--item">
+              <span className="product__details--item--title">Pin:</span>
+              <span className="product__details--trademark">{product?.pin}</span>
+            </div>
+            <div className="product__details--item">
+              <span className="product__details--item--title">Ram:</span>
+              <span className="product__details--trademark">{product?.ram}</span>
+            </div>
           </div>
           <div className="product__details--title">
             MÔ TẢ SẢN PHẨM
           </div>
           <div className="product__details--description">
-            {product.description}
+            {product.infomation}
           </div>
         </div>
       </div>

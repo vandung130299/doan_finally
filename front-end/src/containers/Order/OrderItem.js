@@ -6,22 +6,13 @@ import OrderDetail from './OrderDetail';
 
 function OrderItem(props) {
   const [showDetail, setShowDetail] = useState(false);
-  const { _id, items, orderStatus, address, contactNumber } = props.order;
-
+  console.log(props);
   const showItemList = (items) => {
     let output = [];
     if (items) {
-      for (const key in items) {
-        if (Object.hasOwnProperty.call(items, key)) {
-          output.push(<Item
-            key={items[key]._id}
-            item={items[key]}
-            orderStatus={orderStatus}
-            address={address}
-            contactNumber={contactNumber}
-          />)
-        }
-      }
+      items.map((item, index) => {
+        output.push(<Item key={index} item={item}/>)
+      })
     }
     return output;
   }
@@ -41,11 +32,11 @@ function OrderItem(props) {
   return (
     <div className="">
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: 15, paddingBottom: 0, fontSize: 16, fontWeight: '500' }}>
-        <span>Mã đơn hàng: {_id}</span>
-        <span>Tổng đơn hàng: {formatVnd(totalMoney(items))}</span>
+        <span>Mã đơn hàng: {props.order.id}</span>
+        <span>Tổng đơn hàng: {formatVnd(parseInt(props.order.totalmoney))}</span>
       </div>
 
-      {showItemList(items)}
+      {showItemList(props.order.orderItems)}
       {/* <div className="cart__info">
         <div className="cart__img--containers">
           <img className="cart__img" src={`${api_img}${img}`} alt="" />

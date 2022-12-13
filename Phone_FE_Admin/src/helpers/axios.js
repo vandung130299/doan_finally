@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
 //fix loi khi header gui token cu
 axiosInstance.interceptors.request.use((req) => {
     const { auth } = store.getState();
-    if(auth.token){
+    if (auth.token) {
         req.headers.Authorization = `Bearer ${auth.token}`;
     }
     return req;

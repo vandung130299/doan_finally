@@ -21,7 +21,6 @@ function HeaderContainer(props) {
     const auth = useSelector(state => state.auth);
     const cart = useSelector(state => state.cart);
     useEffect(() => {
-        console.error(auth.authenticate)
         if (auth.authenticate) {
             dispatch(getCartItems());
         } else {
@@ -33,28 +32,19 @@ function HeaderContainer(props) {
         var value = target.value;
         setSearch(value);
         if (value) {
-            axios.get(`/product/list?search=${value}`)
+            axios.get(`/product/all?key=${value}`)
                 .then(res => {
                     setProductList(res.data.products);
-                    console.error('res serach product: ', res.data)
                 })
         } else {
             setProductList([]);
-        }
-    }
-    let onClickSearch = () => {
-        if (search) {
-            axios.get(`/product/list?search=${search}`)
-                .then(res => {
-                    console.error('res serach product: ', res.data)
-                })
         }
     }
     const totalCarts = (carts) => {
         let output = 0;
         if (carts) {
             for (const key in carts) {
-                output += parseInt(carts[key].qty);
+                output += parseInt(carts[key].quantity);
             }
         }
         return output;
@@ -63,10 +53,10 @@ function HeaderContainer(props) {
         if (auth.authenticate) {
             return (<li className="header__navbar-item header__navbar-user">
                 <img className="header__navbar-user-img" src="https://graph.facebook.com/2725237291051373/picture?width=400&height=400" alt="" />
-                <span className="header_-navbar-user-name">{auth.user.firstName + auth.user.lastName}</span>
+                <span className="header_-navbar-user-name">{auth.user.username}</span>
                 <ul className="header__navbar-user-list">
                     <li className="header__navbar-user-item">
-                        <Link to="info-editing" className="header__navbar-user-link" href="">Tài khoản của tôi</Link>
+                        <Link to="/info-editing" className="header__navbar-user-link" href="">Tài khoản của tôi</Link>
                     </li>
                     <li className="header__navbar-user-item">
                         <Link to="/order" className="header__navbar-user-link" href="">Đơn mua</Link>

@@ -18,7 +18,7 @@ public class CartItemConverter {
 		dto.setImageurl(entity.getProduct().getImageurl());
 		dto.setPrice(entity.getProduct().getPrice());
 		dto.setQuantity(entity.getQuantity());
-	
+		dto.setProductQuantity(entity.getProduct().getTotal());
 		return dto;
 	}
 }

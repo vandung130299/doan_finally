@@ -106,6 +106,7 @@ body {
   vertical-align: middle;
   object-fit: cover;
   object-position: center;
+  border: 2px solid #00483d;
 }
 .cart__price{
   width: 200px;

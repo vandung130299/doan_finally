@@ -1,47 +1,52 @@
-import React, { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { generatePublicUrl } from "../../urlConfig";
-import { updateOrder } from "../../actions";
 import Layout from "../../components/Layout";
-
 import "./style.css";
 import ModalProduct from "./modal";
-import { OrderExportPDFData } from "./OrderExportPDFData";
-
-
-const formatCash = (cash) => cash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-
-// var x = 5200000;
-
-// const testCash = (cash) => {
-//   cash = cash.toLocaleString('vi', { style: 'currency', currency: 'VND' });
-// }
-
+import { formatCash } from "../../asset/format";
+import { getAllOrder } from "../../actions";
+import axiosInstance from "../../helpers/axios";
 
 const Orders = (props) => {
+  const optionsOrderStatus = ['pending', 'confirm', 'delivery', 'cancel'];
   const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
   const [orderItem, setorderItem] = useState(null);
-
+  useEffect(() => {
+    dispatch(getAllOrder());
+  }, [])
   const showOrderDetails = (orderItems) => {
     setorderItem(orderItems);
   }
-  const closeModal=() => {
+  const closeModal = () => {
     setorderItem(null);
   }
   const renderOrderDetails = () => {
-    if(orderItem) {
-      return <ModalProduct orderItem={orderItem} closeModal={closeModal}/>
+    if (orderItem) {
+      return <ModalProduct orderItem={orderItem} closeModal={closeModal} />
     }
     return null;
+  }
+  const handleCancel = (_id) => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const deliveryDate = date + ' ' + time;
+    const payload = {
+      status: optionsOrderStatus[3],
+      deliveryDate
+    };
+    axiosInstance.post(`/order/${_id}`, payload).then(res => {
+      console.log(res);
+    })
   }
   return (
     <Layout sidebar>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
-          <h4>Order Management</h4>
+        <h4>Order Management</h4>
       </div>
-      <Table bordered hover size="sm" variant="">
+      <Table style={{ fontSize: '12px' }} responsive="sm" striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
@@ -51,7 +56,7 @@ const Orders = (props) => {
             <th>Code</th>
             <th>Paid</th>
             <th>Status</th>
-            <th></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -64,30 +69,18 @@ const Orders = (props) => {
               <td>{orderItem.id}</td>
               <td>{formatCash(orderItem.totalmoney)} ₫</td>
               <td>{orderItem.status}</td>
-              <td>
-                <Button
-                  variant="light"
-                  // onClick={(e) => { toggleClass(e) }}
-                  onClick={(e) => { showOrderDetails(orderItem) }}
-                  data-toggle="tooltip" data-placement="top" title="View detail order"
-                >
-                  <i className="fa-solid fa-eye"></i>
-                </Button>
-                <Button
-                  variant="danger"
-                  className="ml-2"
-                  data-toggle="tooltip" data-placement="top" title="Cancel order"
-                  // onClick={(e) => { toggleClass(e) }}
-                >
-                  <i className="fa-solid fa-ban"></i>
-                </Button>
+              <td style={{ width: '5%', textAlign: 'center' }}>
+                <DropdownButton align="end" title="" variant="light">
+                  <Dropdown.Item onClick={(e) => { showOrderDetails(orderItem) }}><i className="fa-solid fa-pen-to-square"></i><span style={{ paddingLeft: '10px' }}>Update</span></Dropdown.Item>
+                  {orderItem.status === optionsOrderStatus[0] ? <Dropdown.Item onClick={(e) => handleCancel(orderItem.id)}><i className="fa-solid fa-ban"></i><span style={{ paddingLeft: '10px' }}>Cancel</span></Dropdown.Item> : null}
+                </DropdownButton>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-      { orderItem ? renderOrderDetails() : null }
-    </Layout>
+      {orderItem ? renderOrderDetails() : null}
+    </Layout >
   )
 };
 

@@ -53,14 +53,14 @@ public class ProductController {
 		Page<Product> products = productRepository.findAll(requestedPage);
 		return products;
 	}
-
 	@GetMapping("/all")
 	public ResponseEntity<Map<String, Object>> getProductbyFilter(
 			@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "size", defaultValue = "10") Integer size,
+			@RequestParam(value = "size", defaultValue = "50") Integer size,
 			@RequestParam(value = "categoryId", required = false) Long categoryId,
 			@RequestParam(value = "brandId", required = false) Long brandId,
-			@RequestParam(value = "price", required = false) String price) {
+			@RequestParam(value = "price", required = false) String price,
+			@RequestParam(value = "key", required = false) String key) {
 		Pageable requestedPage = PageRequest.of(page - 1, size);
 
 		Page<Product> products = productRepository.findAll(requestedPage);
@@ -72,51 +72,14 @@ public class ProductController {
 			products = productRepository.findByBrandId(brandId, requestedPage);
 		} else if (categoryId != null && brandId != null) {
 			products = productRepository.findByBrandIdAndCategoryId(brandId, categoryId, requestedPage);
+		} else if (key != null) {
+			products = productRepository.findByProductnameContaining(key, requestedPage);
 		}
 
 		List<Product> productRes = new ArrayList<Product>(products.getContent());
 		System.out.println("categoryId " + categoryId);
 		System.out.println("brandId " + brandId);
-		//loc theo gia
-		if (price != null ) {
-			for (int i = 0; i < productRes.size(); i++) {
-				switch (price) {
-				case "duoi-5-trieu":
-					if (productRes.get(i).getPrice() >= 5000000) {
-						productRes.remove(i);
-					}
-					break;
-				case "5-den-10-trieu":
-					if (productRes.get(i).getPrice() < 5000000 || productRes.get(i).getPrice() >= 10000000) {
-						System.out.println("item  " + i + " price"+ productRes.get(i).getPrice() );
-						productRes.remove(i);
-					}
-					break;
-
-				case "10-den-15-trieu":
-					if (productRes.get(i).getPrice() < 10000000 || productRes.get(i).getPrice() >= 15000000) {
-						productRes.remove(i);
-					}
-					break;
-
-				case "15-den-20-trieu":
-					if (productRes.get(i).getPrice() < 15000000 || productRes.get(i).getPrice() >= 20000000) {
-						productRes.remove(i);
-					}
-					break;
-
-				case "tren-20-trieu":
-					if (productRes.get(i).getPrice() < 20000000) {
-						productRes.remove(i);
-					}
-					break;
-
-				default:
-					break;
-				}
-			}
-		}
-		
+		System.out.println("key " + key);
 
 		Map<String, Object> response = new HashMap<>();
 		response.put("products", productRes);

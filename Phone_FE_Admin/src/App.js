@@ -6,7 +6,7 @@ import Signin from "./containers/Signin";
 import Signup from "./containers/Signup";
 import PrivateRoute from "./components/HOC/PrivateRoute";
 import { useDispatch, useSelector } from "react-redux";
-import { getInitialData, isUSerLoggedIn } from "./actions";
+import { getAllOrder, getAllReceipt, getListAccount, getProducts, isUSerLoggedIn } from "./actions";
 import Products from "./containers/Products";
 import Orders from "./containers/Orders";
 import { Account } from "./containers/Account";
@@ -15,20 +15,25 @@ import { Receipt } from "./containers/Receipt";
 import { Category } from "./containers/Category";
 import { Brand } from "./containers/Brand";
 import { ToastContainer } from "react-toastify";
+import { getAllBrand } from "./actions/brand.action";
 
 function App() {
 
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
-  
+
   useEffect(() => {
     if (!auth.authenticate) {
       dispatch(isUSerLoggedIn(true));
     }
     // load trc danh muc va product
     if (auth.authenticate) {
-      dispatch(getInitialData());
+      // dispatch(getListAccount());
+      // dispatch(getAllBrand());
+      // dispatch(getAllOrder());
+      // dispatch(getProducts());
+      // dispatch(getAllReceipt());
     }
   }, [auth.authenticate]);
 

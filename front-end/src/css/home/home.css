@@ -89,9 +89,9 @@
   .shop__body .container .shop__nav__menu li .catalog::after {
     content: '';
     position: absolute;
-    top: -15%;
+    top: -20%;
     width: 100%;
-    height: 15%;
+    height: 20%;
   }
   
   .shop__body .container .shop__nav__menu li .catalog h4 {

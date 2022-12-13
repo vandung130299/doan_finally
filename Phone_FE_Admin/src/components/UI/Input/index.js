@@ -16,6 +16,7 @@ const Input = (props) => {
                     className="form-control form-control-sm"
                     value={props.value}
                     onChange={props.onChange}
+                    name={props.name}
                     required
                 >
                     <option value="">{props.placeholder}</option>
@@ -34,7 +35,9 @@ const Input = (props) => {
             input = <Form.Group>
                 {props.label && <Form.Label>{props.label}</Form.Label>}
                 <Form.Control
+                    disabled={props.disabled}
                     required
+                    name={props.name}
                     type={props.type}
                     placeholder={props.placeholder}
                     value={props.value}

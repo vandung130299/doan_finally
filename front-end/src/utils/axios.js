@@ -13,7 +13,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((req) => {
   const { auth } = store.getState();
-  // console.error('token: ',auth.token)
   if(auth.token){
       req.headers.Authorization = `Bearer ${auth.token}`;
   }

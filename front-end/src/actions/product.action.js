@@ -1,29 +1,34 @@
 import axios from "../utils/axios";
 import { api } from './../constants/Config';
 import { productConstants } from "../constants/ActionTypes";
+import { toast } from "react-toastify";
 
-export const getListProduct = (idCategory = '', idBrand = '', search = '', page = '', limit = '') => {
-  // console.error('idCategory: ', idCategory);
-  // console.error('idBrand: ', idBrand);
-  if(page){
-    page-=1;
-  }
+export const getListProduct = (categoryId, brandId, price, page, size,key) => {
   return async (dispatch) => {
-    try {
-      dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
-      const res = await axios.get(`/product/list?category=${idCategory}&brand=${idBrand}&search=${search}&page=${page}&limit=${limit}`);
-      console.error('res', res);
-      if (res.status === 200) {
-        const { products, total, pageSize } = res.data;
-        dispatch({
-          type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
-          payload: { products, total, pageSize },
-        });
-      } else {
-        dispatch({ type: productConstants.GET_ALL_PRODUCTS_FAILURE });
+    axios.get('/product/all', {
+      params:
+      {
+        categoryId: categoryId,
+        brandId: brandId,
+        price: price,
+        page,
+        key,
+        size
       }
-    } catch (error) {
-      console.log(error);
-    }
+    })
+    .then((response) => {
+      dispatch({
+        type: productConstants.GET_ALL_PRODUCTS_REQUEST,
+        payload: {
+          products: response.data.products,
+          currentPage: response.data.currentPage,
+          totalItems: response.data.totalItems,
+          totalPages: response.data.totalPages
+        }
+      });
+    })
+    .catch((error) => {
+      toast.error('Lỗi hệ thống vui lòng liên hệ Admin')
+    })
   };
 };

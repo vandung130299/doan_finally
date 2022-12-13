@@ -3,24 +3,13 @@ import { brandConstants } from "../constants/ActionTypes";
 
 export const getAllBrand = () => {
   return async dispatch => {
-    dispatch({
-      type: brandConstants.GET_ALL_BRAND_REQUEST
-    })
-    const res = await axios.get('/brand/listAll');
-    if (res.status === 200) {
+    axios.get('/brand/all').then((res) => {
       dispatch({
-        type: brandConstants.GET_ALL_BRAND_SUCCESS,
+        type: brandConstants.GET_ALL_BRAND_REQUEST,
         payload: {
-          ...res.data
+          brands: res.data.brands
         }
       })
-    } else if (res.status === 400) {
-      dispatch({
-        type: brandConstants.GET_ALL_BRAND_FAILURE,
-        payload: {
-          error: res.data.error
-        }
-      })
-    }
+    });
   }
 }

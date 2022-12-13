@@ -1,5 +1,4 @@
 export default function Validator(options) {
-    console.log(options)
     var selectorRules = {};
     function Validate(inputElement, rule) {
         var errorMessage;
@@ -68,7 +67,6 @@ export default function Validator(options) {
                         }
                         return values;
                     }, {});
-                    //console.log(formValues);
                     options.onSubmit(formValues);
                 }
             }
@@ -125,11 +123,9 @@ Validator.isPassword = function (selector, min) {
 }
 
 Validator.isConformed = function (selector, getConfirmValue, message) {
-    console.error('getConfirmValue', getConfirmValue())
     return {
         selector,
         test: function (value) {
-            console.error('getConfirmValue', getConfirmValue())
             return value == getConfirmValue() ? undefined : message || 'Xác nhận mật khẩu không chính xác';
         }
     }

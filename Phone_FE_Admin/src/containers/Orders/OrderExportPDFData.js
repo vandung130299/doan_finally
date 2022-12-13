@@ -18,7 +18,7 @@ const OrderExportPDFData = {
       currentNo++;
       itemRows.push([
         { text: currentNo, alignment: 'center' },
-        orderItem.fullname ? orderItem.fullname : "Khách vãn lai",
+        { text: item.productname, alignment: 'left' },
         { text: formatVnd(item.pricecurrent), alignment: 'center' },
         { text: Math.abs(item.quantity), alignment: 'center' }])
     });

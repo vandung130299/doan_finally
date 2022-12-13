@@ -35,7 +35,7 @@ function CartContainer(props) {
         let output=0;
         if(carts.length>0){
             carts.map((cart,index)=>{
-                output+=cart.quantityOrder*(cart.price-(cart.price*cart.sale/100));
+                output+=cart.quantity*cart.price;
             })
         }
         return output;

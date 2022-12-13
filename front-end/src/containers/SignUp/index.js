@@ -7,15 +7,13 @@ import { toast } from 'react-toastify';
 function SignUp(props) {
   const [user, setUser] = useState({
     email: '',
-    firstName: '',
-    lastName: '',
-    contactNumber: '',
+    name: '',
+    username: '',
+    phone: '',
     address: '',
     password: '',
     confirmPassword: ''
   });
-
-  const dispatch = useDispatch();
 
   let onChangeForm = (e) => {
     let target = e.target;
@@ -31,21 +29,23 @@ function SignUp(props) {
       form: '#register-form',
       rules: [
         Validator.isRequired('#email'),
-        Validator.isRequired('#firstName'),
-        Validator.isRequired('#lastName'),
-        Validator.isRequired('#contactNumber'),
+        Validator.isRequired('#name'),
+        Validator.isRequired('#username'),
+        Validator.isRequired('#phone'),
         Validator.isRequired('#address'),
         Validator.isRequired('#password'),
       ],
       messageElement: '.form-message',
       onSubmit: function (user) {
-        axios.post('/signup', { ...user })
+        console.log(user);
+        axios.post('/auth/signup', { ...user })
           .then(res => {
-            if (res.status === 201) {
+            console.log(res);
+            if (res.data.success) {
               toast.success('Đăng ký tài khoản thành công!');
               props.setIsSwitchForm(!props.isSwitchForm);
             } else {
-              toast.error('Đăng ký tài khoản thất bại!');
+              toast.error(res.data.message);
             }
           });
       }
@@ -66,11 +66,11 @@ function SignUp(props) {
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>
               <div className="auth-form__group">
-                <input type="text" className="auth-form__input" id="firstName" name="firstName" value={user.firstName} onChange={onChangeForm} placeholder="First name" />
+                <input type="text" className="auth-form__input" id="name" name="name" value={user.firstName} onChange={onChangeForm} placeholder="Name" />
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>
               <div className="auth-form__group">
-                <input type="text" className="auth-form__input" id="lastName" name="lastName" value={user.lastName} onChange={onChangeForm} placeholder="Last name" />
+                <input type="text" className="auth-form__input" id="username" name="username" value={user.username} onChange={onChangeForm} placeholder="Username" />
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>
               <div className="auth-form__group">
@@ -78,7 +78,7 @@ function SignUp(props) {
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>
               <div className="auth-form__group">
-                <input type="text" className="auth-form__input" id="contactNumber" name="contactNumber" value={user.contactNumber} onChange={onChangeForm} placeholder="Số điện thoại" />
+                <input type="text" className="auth-form__input" id="phone" name="phone" value={user.phone} onChange={onChangeForm} placeholder="Số điện thoại" />
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>
               <div className="auth-form__group">

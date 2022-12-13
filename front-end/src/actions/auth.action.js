@@ -1,38 +1,29 @@
 import axios from "../utils/axios"
 import { authConstants } from "../constants/ActionTypes";
 import { toast } from 'react-toastify';
+import store from "../store";
 
 export const login = (user) => {
-  return async (dispatch) => {
-
-    dispatch({ type: authConstants.LOGIN_REQUEST })
-    const res = await axios.post('/signIn', {
+  return (dispatch) => {
+    // dispatch({ type: authConstants.LOGIN_REQUEST })
+    axios.post('/auth/signin', {
       ...user
-    });
-    console.error(res);
-    if (res.status === 200 && !res.data.message) {
+    }).then(res =>{
       toast.success('Đăng nhập thành công!')
-      const { token, user } = res.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      const { accessToken } = res.data;
+      localStorage.setItem('token', accessToken);
+      localStorage.setItem('user', JSON.stringify(res.data));
       dispatch({
         type: authConstants.LOGIN_SUCCESS,
         payload: {
-          token,
-          user
+          token: accessToken,
+          user: res.data
         }
       })
-    } else {
+    })
+    .catch(err => {
       toast.error('Vui lòng kiểm tra lại tài khoản mật khẩu!');
-      if (res.status === 400) {
-        dispatch({
-          type: authConstants.LOGIN_FAILURE,
-          payload: {
-            error: res.data.error
-          }
-        })
-      }
-    }
+    });
   }
 }
 
@@ -48,55 +39,35 @@ export const isUserLoggedIn = () => {
           user
         }
       })
-    } else {
-      dispatch({
-        type: authConstants.LOGIN_FAILURE,
-        payload: {
-          error: 'Failed to login'
-        }
-      })
     }
   }
 }
 
 export const signOut = () => {
   return async dispatch => {
+    localStorage.clear();
+    toast.success("Đăng xuất thành công!");
     dispatch({
-      type: authConstants.LOGOUT_REQUEST
+      type: authConstants.LOGOUT_SUCCESS
     })
-    const res = await axios.post('admin/signout');
-
-    if (res.status === 200) {
-      localStorage.clear();
-      dispatch({
-        type: authConstants.LOGOUT_SUCCESS
-      })
-    } else {
-      dispatch({
-        type: authConstants.LOGOUT_FAILURE,
-        payload: {
-          error: res.data.error
-        }
-      })
-    }
   }
 }
 
 export const updateUser = (user) => {
   return async dispatch => {
-    axios.post('/user/update', user).then(res => {
-      if (res.status === 201) {
-        toast.success("Cập nhập thông tin thành công!");
-        localStorage.setItem('user', JSON.stringify(res.data.updatedUser));
-        dispatch({
-          type: authConstants.UPDATE_USER_SUCCESS,
-          payload: {
-            user: res.data.updatedUser
-          }
-        })
-      } else {
-        toast.error("Cập nhập thông tin thất bại!");
-      }
+    const { auth } = store.getState();
+    axios.post('account/update', {...user, id: auth.user.userId, email: auth.user.email}).then(res => {
+      toast.success("Cập nhập thông tin thành công!");
+      localStorage.setItem('user', JSON.stringify(res.data));
+      dispatch({
+        type: authConstants.UPDATE_USER_SUCCESS,
+        payload: {
+          user: res.data
+        }
+      })
+    })
+    .catch(err => {
+      toast.error(err);
     })
   }
 }

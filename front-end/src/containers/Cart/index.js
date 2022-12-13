@@ -13,18 +13,15 @@ function CartContainer(props) {
 
   let showProductList = (carts) => {
     let output = [];
-    console.error('carts', carts)
-    if (carts && Object.keys(carts).length) {
-      for (const key in carts) {
-        if (Object.hasOwnProperty.call(carts, key)) {
-          output.push(<CartItem
-            key={carts[key]._id}
-            cart={carts[key]}
-          />)
-        }
-      }
+    if (carts && carts.length > 0) {
+      carts.map((item, index) => {
+  	    output.push(<CartItem
+          key={index}
+          cart={item}
+        />)
+      })
     }else{
-      output=<NotFound width="100" content="Chưa có sản phẩm trong giỏ hàng"/>
+      output = <NotFound width="100" content="Chưa có sản phẩm trong giỏ hàng"/>
     }
     return output;
   }
@@ -34,7 +31,7 @@ function CartContainer(props) {
     if (carts) {
       for (const key in carts) {
         if (Object.hasOwnProperty.call(carts, key)) {
-          output += carts[key].qty * (carts[key].price - (carts[key].price * carts[key].offer / 100));
+          output += carts[key].quantity * carts[key].price;
         }
       }
     }

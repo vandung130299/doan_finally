@@ -30,7 +30,7 @@ const Chart = (props) => {
       }
     },
     xAxis: {
-      categories: ['11','22','33','44'],
+      categories: ['11', '22', '33', '44'],
       labels: {
         style: {
           'font-size': '0.875rem',
@@ -61,15 +61,15 @@ const Chart = (props) => {
       }
     ]
   };
-    return (
-      <div className='my-chart'>
-        <h2 className='chart-title'>Total Chart</h2>
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={chartOptions}
-          />
-      </div>
-    )
+  return (
+    <div className='my-chart'>
+      <h2 className='chart-title'>Total Chart</h2>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptions}
+      />
+    </div>
+  )
 }
 
 export default Chart

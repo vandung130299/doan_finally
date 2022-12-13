@@ -5,7 +5,7 @@ import { login } from '../../actions';
 
 function SignIn(props) {
   const [user, setUser] = useState({
-    email: 'cobebandiem@gmail.com',
+    usernameOrEmail: 'cobebandiem',
     password: '123456'
   });
 
@@ -29,7 +29,6 @@ function SignIn(props) {
       ],
       messageElement: '.form-message',
       onSubmit: function (user) {
-        console.error(user)
         dispatch(login(user));
       }
     });
@@ -50,13 +49,13 @@ function SignIn(props) {
             <div className="auth-form__form">
               <div className="auth-form__group">
                 <input
-                  name="email"
+                  name="usernameOrEmail"
                   id="email"
                   onChange={onChangeForm}
                   type="text"
                   className="auth-form__input"
                   placeholder="Email của ban"
-                  value={user.email}
+                  value={user.usernameOrEmail}
                 />
                 <span style={{ color: "red" }} className="form-message">&nbsp;</span>
               </div>

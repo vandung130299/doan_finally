@@ -243,13 +243,13 @@ export const Account = (props) => {
                     </div>
                     <Row>
                         <Col md={12}>
-                            <button
+                            {/* <button
                                 className='btn-save'
                                 onClick={handleShowCreate}
                                 style={{ float: 'right', marginBottom: 15 }}
                             >
                                 <i className="fa-solid fa-user-plus"></i>
-                            </button>
+                            </button> */}
                             {renderAccounts()}
                         </Col>
                     </Row>

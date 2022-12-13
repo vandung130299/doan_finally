@@ -11,9 +11,9 @@ const initState = {
     authenticating: false,
 
     //logout
-    loading:false,
-    error:null,
-    message:'',
+    loading: false,
+    error: null,
+    message: '',
     notification: null,
 
 }
@@ -21,7 +21,6 @@ const initState = {
 const authReducer = (state = initState, action) => {
     let today = new Date();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log(action)
     switch (action.type) {
         case authConstants.LOGIN_REQUEST:
             state = {
@@ -42,13 +41,13 @@ const authReducer = (state = initState, action) => {
             state = {
                 ...state,
                 authenticating: false,
-                notification:`${action.payload.error}   ------  ${time}`
+                notification: `${action.payload.error}   ------  ${time}`
             };
             break;
         case authConstants.LOGOUT_REQUEST:
             state = {
                 ...state,
-                loading:true,
+                loading: true,
 
             };
             break;
@@ -60,8 +59,8 @@ const authReducer = (state = initState, action) => {
         case authConstants.LOGOUT_FAILURE:
             state = {
                 ...state,
-                error:action.payload.error,
-                loading:false,
+                error: action.payload.error,
+                loading: false,
 
             };
             break;

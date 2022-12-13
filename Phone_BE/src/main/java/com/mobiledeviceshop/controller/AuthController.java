@@ -67,9 +67,8 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        
-        
-        /// hoi cui bap
+
+
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Long userId= userPrincipal.getId();
         Set<Role> userRole= userRepository.findById(userId).get().getRoles();
@@ -77,21 +76,24 @@ public class AuthController {
         List<Role> listA = new ArrayList<Role>();
         listA.addAll(userRole);
         String role = listA.get(0).getName().toString();
+        String username = userRepository.findById(userId).get().getUsername();
+        String email = userRepository.findById(userId).get().getEmail();
+        String address = userRepository.findById(userId).get().getAddress();
+        String phone = userRepository.findById(userId).get().getPhone();
         String name = userRepository.findById(userId).get().getName();
-        ////
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt,userId,role,name));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt,userId,role,username, email, address, phone, name));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
 
         // Creating user's account

@@ -5,9 +5,9 @@ import { updateUser } from '../../actions';
 
 function User(props) {
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    contactNumber: '',
+    name: '',
+    phone: '',
+    email: '',
     address: '',
   });
   const auth = useSelector(state => state.auth);
@@ -16,9 +16,9 @@ function User(props) {
     Validator({
       form: '#form-1',
       rules: [
-        Validator.isRequired('#firstName'),
-        Validator.isRequired('#lastName'),
-        Validator.isRequired('#contactNumber'),
+        Validator.isRequired('#name'),
+        Validator.isRequired('#email'),
+        Validator.isRequired('#phone'),
         Validator.isRequired('#address'),
       ],
       messageElement: '.form-message',
@@ -29,7 +29,6 @@ function User(props) {
   }, [])
 
   useEffect(() => {
-    console.error(auth.user)
     setUser(auth.user);
   }, [auth.user])
 
@@ -42,23 +41,23 @@ function User(props) {
       [name]: value
     });
   }
-  const { firstName, lastName, address, contactNumber } = user;
+  const { name, email, address, phone } = user;
   return (
     <form id="form-1">
       <br />
       <div className="form-group">
-        <label>First Name :</label>
-        <input onChange={onChange} id="firstName" name="firstName" type="text" className="form-control" value={firstName} />
+        <label>Email :</label>
+        <input onChange={onChange} id="email" name="email" type="text" className="form-control" disabled value={email} />
         <span style={{ color: "red" }} className="form-message">&nbsp;</span>
       </div>
       <div className="form-group">
-        <label>Last Name :</label>
-        <input onChange={onChange} id="lastName" name="lastName" type="text" className="form-control" value={lastName} />
+        <label>Name :</label>
+        <input onChange={onChange} id="name" name="name" type="text" className="form-control" value={name} />
         <span style={{ color: "red" }} className="form-message">&nbsp;</span>
       </div>
       <div className="form-group">
         <label>Phone :</label>
-        <input onChange={onChange} id="contactNumber" name="contactNumber" type="text" className="form-control" value={contactNumber} />
+        <input onChange={onChange} id="phone" name="phone" type="text" className="form-control" value={phone} />
         <span style={{ color: "red" }} className="form-message">&nbsp;</span>
       </div>
       <div className="form-group">

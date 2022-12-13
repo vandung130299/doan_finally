@@ -2,6 +2,7 @@ package com.mobiledeviceshop.controller;
 
 import java.util.List;
 
+import com.mobiledeviceshop.payload.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ import com.mobiledeviceshop.entity.CartItem;
 import com.mobiledeviceshop.entity.Order;
 import com.mobiledeviceshop.entity.OrderItem;
 import com.mobiledeviceshop.entity.User;
+import com.mobiledeviceshop.entity.Product;
 import com.mobiledeviceshop.payload.ApiResponse;
 import com.mobiledeviceshop.payload.OrderRequest;
 import com.mobiledeviceshop.repository.CartItemRepository;
 import com.mobiledeviceshop.repository.CartRepository;
+import com.mobiledeviceshop.repository.ProductRepository;
 import com.mobiledeviceshop.repository.OrderItemRepository;
 import com.mobiledeviceshop.repository.OrderRepository;
 import com.mobiledeviceshop.repository.UserRepository;
@@ -57,6 +60,9 @@ public class CheckoutController {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
@@ -88,6 +94,24 @@ public class CheckoutController {
 				List<CartItem> listcart =cartItemRepository.findByCart(c);
 				
 				for (int i = 0; i < listcart.size(); i++) {
+					ProductRequest newProduct = new ProductRequest();
+					newProduct.setId(listcart.get(i).getProduct().getId());
+					newProduct.setCpu(listcart.get(i).getProduct().getCpu());
+					newProduct.setImageurl(listcart.get(i).getProduct().getImageurl());
+					newProduct.setInfodesign(listcart.get(i).getProduct().getInfodesign());
+					newProduct.setInfomation(listcart.get(i).getProduct().getInfomation());
+					newProduct.setMonitor(listcart.get(i).getProduct().getMonitor());
+					newProduct.setPin(listcart.get(i).getProduct().getPin());
+					newProduct.setPrice(listcart.get(i).getProduct().getPrice());
+					newProduct.setProductname(listcart.get(i).getProduct().getProductname());
+					newProduct.setRam(listcart.get(i).getProduct().getRam());
+					newProduct.setSold(listcart.get(i).getProduct().getSold() + listcart.get(i).getQuantity());
+					newProduct.setSystem(listcart.get(i).getProduct().getSystem());
+					newProduct.setThietKe(listcart.get(i).getProduct().getThietKe());
+					newProduct.setCategoryId(listcart.get(i).getProduct().getCategory().getId());
+					newProduct.setBrandId(listcart.get(i).getProduct().getBrand().getId());
+					newProduct.setTotal(listcart.get(i).getProduct().getTotal() - listcart.get(i).getQuantity());
+					productService.updateProduct(newProduct);
 					OrderItem orderItem = new OrderItem();
 					orderItem.setProduct(listcart.get(i).getProduct());
 					orderItem.setQuantity(listcart.get(i).getQuantity());

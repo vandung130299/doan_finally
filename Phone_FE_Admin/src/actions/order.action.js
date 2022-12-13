@@ -1,49 +1,21 @@
-import { getInitialData } from ".";
+import { toast } from "react-toastify";
+import axiosInstance from "../helpers/axios";
 import axios from "../helpers/axios";
 import { orderConstants } from "./constants";
 
-export const getCustomerOrders = () => {
-  return async (dispatch) => {
-    dispatch({ type: orderConstants.GET_CUSTOMER_ORDER_REQUEST });
-    try {
-      const res = await axios.get("/order/all");
+export const getAllOrder = () => {
+  return (dispatch) => {
+    axiosInstance.get('/order/all').then(res => {
       if (res.status === 200) {
-        const { listOrder } = res.data;
         dispatch({
           type: orderConstants.GET_CUSTOMER_ORDER_SUCCESS,
-          payload: { listOrder },
-        });
+          payload: { listOrder: res.data.listOrder }
+        })
       } else {
-        const { error } = res.data;
-        dispatch({
-          type: orderConstants.GET_CUSTOMER_ORDER_FAILURE,
-          payload: { error },
-        });
+        toast.error('Get list order something error, please contact Admin!');
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-
-export const updateOrder = (payload,id) => {
-  return async (dispatch) => {
-    dispatch({ type: orderConstants.UPDATE_CUSTOMER_ORDER_REQUEST });
-    try {
-      const res = await axios.post(`/order/${id}`, payload);
-      if (res.status === 200) {
-        dispatch({ type: orderConstants.UPDATE_CUSTOMER_ORDER_SUCCESS })
-          dispatch(getInitialData());
-      } else {
-        const { error } = res.data;
-        dispatch({
-          type: orderConstants.UPDATE_CUSTOMER_ORDER_FAILURE,
-          payload: { error },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+    }).catch(err => {
+      toast.error('Get list order something error, please contact Admin!');
+    })
+  }
+}

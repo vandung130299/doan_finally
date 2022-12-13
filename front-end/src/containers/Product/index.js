@@ -51,12 +51,13 @@ function Products(props) {
     }
 
     useEffect(() => {
-        let keySearch = query.get("search") ? query.get("search") : '';
-        let pageUrl = query.get("page") ? query.get("page") : '';
-        if (pageUrl) {
-            setPage(pageUrl - 1);
-        }
-        dispatch(getListProduct(props.idCategory, props.idBrand, keySearch, pageUrl, size));
+        const categoryId = query.get('category')
+        const brandId = query.get('brand')
+        const price = query.get('price')
+        const page = query.get('page')
+        const size = query.get('size')
+        const key = query.get('key')
+        dispatch(getListProduct(categoryId, brandId, price, page, key, size));
     }, [])
     // const onSetPage = (number) => {
     //     // console.error(' page + number: ',  page + number)
@@ -111,43 +112,15 @@ function Products(props) {
                     <h4>{props.title}</h4>
                 </div>
                 <div className="list__items grid row">
-                    {showProductList(product.products)}
+                    {product ? showProductList(product.products) : null}
                 </div>
             </div>
             {/* <ProductList title={title}>
                 {showProductList(products)}
             </ProductList> */}
-            <ul style={{ width: '100%', display: 'flex', justifyContent: 'center' }} className="pagination home__pagination">
-                {/* <li className={`pagination-item ${classPagePrevious}`} onClick={() => { onSetPage(-1) }}>
-                    <a className="pagination-item__link">
-                        <i className="pagination-item__icon fas fa-angle-left"></i>
-                    </a>
-                </li> */}
+            {/* <ul style={{ width: '100%', display: 'flex', justifyContent: 'center' }} className="pagination home__pagination">
                 {totalPage ? showNumberPage(totalPage) : null}
-                {/* <li className="pagination-item pagination-item--active">
-                    <a href="" className="pagination-item__link">1</a>
-                </li>
-                <li className="pagination-item">
-                    <a href="" className="pagination-item__link">2</a>
-                </li>
-                <li className="pagination-item">
-                    <a href="" className="pagination-item__link">3</a>
-                </li>
-                <li className="pagination-item">
-                    <a href="" className="pagination-item__link">4</a>
-                </li>
-                <li className="pagination-item">
-                    <a href="" className="pagination-item__link">...</a>
-                </li>
-                <li className="pagination-item">
-                    <a href="" className="pagination-item__link">14</a>
-                </li> */}
-                {/* <li className={`pagination-item ${classPageNext}`} onClick={() => { onSetPage(1) }}>
-                    <a className="pagination-item__link">
-                        <i className="pagination-item__icon fas fa-angle-right"></i>
-                    </a>
-                </li> */}
-            </ul>
+            </ul> */}
         </React.Fragment>
     );
 }

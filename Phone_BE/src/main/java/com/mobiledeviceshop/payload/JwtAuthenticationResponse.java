@@ -5,7 +5,11 @@ public class JwtAuthenticationResponse {
     private String tokenType = "Bearer";
     private Long userId;
     private String role;
-    private String name;
+	private String username;
+	private String email;
+	private String address;
+	private String phone;
+	private String name;
     
     
     
@@ -19,11 +23,15 @@ public class JwtAuthenticationResponse {
         return accessToken;
     }
 
-    public JwtAuthenticationResponse(String accessToken, Long userId, String role, String name) {
+    public JwtAuthenticationResponse(String accessToken, Long userId, String role, String username, String email, String address, String phone, String name) {
 		super();
 		this.accessToken = accessToken;
 		this.userId = userId;
 		this.role = role;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
 		this.name = name;
 	}
 
@@ -55,6 +63,15 @@ public class JwtAuthenticationResponse {
 		this.role = role;
 	}
 
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,7 +79,30 @@ public class JwtAuthenticationResponse {
 	public void setName(String name) {
 		this.name = name;
 	}
-    
-    ////
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	////
     
 }
